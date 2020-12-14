@@ -14,4 +14,8 @@
     <select id="getUserList" resultMap="userModel" >
         select * from t_users
     </select>
+
+    <select id="getUserById" resultMap="userModel">
+        select * from t_users where id = #{id}
+    </select>
 </mapper>

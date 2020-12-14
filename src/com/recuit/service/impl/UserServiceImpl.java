@@ -32,4 +32,14 @@ public class UserServiceImpl implements UserService {
         List<UserModel> userList = userMapper.getUserList();
         return userList;
     }
+
+    /**
+     * 根据用户id用户信息
+     * @param id
+     * @return
+     */
+    @Override
+    public UserModel getUserById(String id) {
+        return userMapper.getUserById(id);
+    }
 }

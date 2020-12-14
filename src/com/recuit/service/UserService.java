@@ -12,4 +12,6 @@ public interface UserService {
      * @return
      */
     public List<UserModel> getUserList();
+
+    UserModel getUserById(String id);
 }
