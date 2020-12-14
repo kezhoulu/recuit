@@ -122,13 +122,13 @@
 								<tbody>
 									<c:forEach items="${userList.list}" var="user">
 										<tr>
-											<td>${user.id }</td>
-											<td>${user.userName }</td>
-											<td>${user.email }</td>
-											<td>${user.phoneNum }</td>
-											<td>${user.status }</td>
+											<td class="text-center">${user.id }</td>
+											<td class="text-center">${user.userName }</td>
+											<td class="text-center">${user.email }</td>
+											<td class="text-center">${user.phoneNum }</td>
+											<td class="text-center">${user.status }</td>
 											<td class="text-center">
-												<a href="${pageContext.request.contextPath}/user/getUserById.do?id=${user.id}" class="btn bg-olive btn-xs">编辑</a>
+												<a href="${pageContext.request.contextPath}/user/getUserById.do?id=${user.id}&edit=true" class="btn bg-olive btn-xs">编辑</a>
 												<a href="${pageContext.request.contextPath}/user/deleteUserById.do?id=${user.id}" class="btn bg-olive btn-xs">删除</a>
 											</td>
 										</tr>

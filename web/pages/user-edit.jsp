@@ -95,19 +95,22 @@
 				method="post">
 				<!-- 正文区域 -->
 				<section class="content"> <!--产品信息-->
-
+					<input type="text" name="edit" style="display:none" value="${user.edit}"/>
+					<input type="text" name="id" style="display:none" value="${user.id}"/>
+					<input id="rightvalue" type="text" style="display:none" value="${user.right}"/>
+					<input id="statusvalue" type="text" style="display:none" value="${user.status}"/>
 				<div class="panel panel-default">
 					<div class="panel-heading">用户信息</div>
 					<div class="row data-type">
 
 						<div class="col-md-2 title">用户名称</div>
 						<div class="col-md-4 data">
-							<input type="text" class="form-control" name="username"
+							<input type="text" class="form-control" name="userName"
 								placeholder="用户名称" value="${user.userName}">
 						</div>
 						<div class="col-md-2 title">密码</div>
 						<div class="col-md-4 data">
-							<input type="text" class="form-control" name="password"
+							<input type="text" class="form-control" name="passWord"
 								placeholder="密码" value="${user.passWord}">
 						</div>
 						<div class="col-md-2 title">邮箱</div>

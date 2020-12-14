@@ -80,7 +80,7 @@
 			  <bean class="com.github.pagehelper.PageInterceptor">
 				  <property name="properties">
 					  <value>
-						  helperDialect=postgresql
+						  helperDialect=mysql
 						  reasonable=true
 						  supportMethodsArguments=false
 						  params=count=countSql

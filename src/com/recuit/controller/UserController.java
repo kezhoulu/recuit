@@ -35,15 +35,19 @@ public class UserController {
     }
 
     @RequestMapping(value = "/getUserById.do",method = RequestMethod.GET)
-    public ModelAndView getUserById(String id){
+    public ModelAndView getUserById(String id,boolean edit){
         ModelAndView mv = new ModelAndView();
-        mv.addObject("user" , userService.getUserById(id));
+        UserModel user = userService.getUserById(id);
+        user.setEdit(edit);
+        user.setRight("ADMIN,USER");
+        mv.addObject("user" , user);
         mv.setViewName("user-edit");
         return  mv;
     }
 
     @RequestMapping(value = "/save.do",method = RequestMethod.POST)
-    public ModelAndView saveUser(String right,String status){
+    public ModelAndView saveUser(UserModel user){
+
         return null;
     }
 

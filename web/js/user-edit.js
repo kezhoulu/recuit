@@ -19,18 +19,25 @@ function setSidebarActive(tagUri) {
 
 //给select标签赋值
 $(function () {
-    $("#status").val("${user.status}");
+    var status =   $("#statusvalue").val();
+    $("#status option").each(function(){
+        var value = $(this).attr("value");
+        var text = $(this).context.innerHTML;
+        if(status!=null && status.indexOf(value) != -1){
+            $(this).remove();
+            $("#status").append("<option selected value="+value+">"+text+"</option>");
+        }
+    })
 });
 
 $(function(){
-    var array = new Array();  //定义数组
+    var right = $("#rightvalue").val();
     $("#right option").each(function(){
         var value = $(this).attr("value");
-        var text = $(this).val();
-        if(value!=''){
+        var text = $(this).context.innerHTML;
+        if(right!=null && right.indexOf(value) != -1){
             $(this).remove();
             $("#right").append("<option selected value="+value+">"+text+"</option>");
-            $(this).attr("selected",'true');
         }
     })
-})
+});

@@ -13,6 +13,28 @@ public class UserModel {
 
     private String status;
 
+    private boolean edit ;
+
+    public boolean getEdit() {
+        return edit;
+    }
+
+    public void setEdit(boolean edit) {
+        this.edit = edit;
+    }
+
+    public String getRight() {
+        return right;
+    }
+
+    public void setRight(String right) {
+        this.right = right;
+    }
+
+    private String right;
+
+
+
 
     public String getId() {
         return id;
