@@ -9,7 +9,9 @@
     <bean id="userService" class="com.recuit.service.impl.UserLoginServiceImpl"/>
 
     <!-- 配置不拦截的资源 -->
-    <security:http pattern="/login.jsp" security="none"/>
+    <security:http pattern="/pages/login.jsp" security="none"/>
+    <security:http pattern="/user/register_url.do" security="none"/>
+    <security:http pattern="/user/register.do" security="none"/>
     <security:http pattern="/failer.jsp" security="none"/>
     <security:http pattern="/css/**" security="none"/>
     <security:http pattern="/img/**" security="none"/>
@@ -26,7 +28,7 @@
 
         <!-- 定义跳转的具体的页面 -->
         <security:form-login
-                login-page="/login.jsp"
+                login-page="/pages/login.jsp"
                 login-processing-url="/login"
                 default-target-url="/index.jsp"
                 authentication-failure-url="/failer.jsp"
@@ -37,7 +39,7 @@
         <security:csrf disabled="true"/>
 
         <!-- 退出 -->
-        <security:logout invalidate-session="true" logout-url="/logout.do" logout-success-url="/login.jsp" />
+        <security:logout invalidate-session="true" logout-url="/logout.do" logout-success-url="/pages/login.jsp" />
 
     </security:http>
 

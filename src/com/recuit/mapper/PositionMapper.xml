@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.recuit.mapper.PositionMapper">
+    <resultMap id="positionModel" type="com.recuit.model.PositionModel">
+        <result property="id" column="c_id" jdbcType="VARCHAR"/>
+        <result property="gzdd" column="c_gzdd" jdbcType="VARCHAR"/>
+        <result property="gznx" column="c_gznx" jdbcType="VARCHAR"/>
+        <result property="zpxq" column="c_zpxq" jdbcType="VARCHAR"/>
+        <result property="gwmc" column="c_gwmc" jdbcType="VARCHAR"/>
+        <result property="ssgs" column="c_ssgs" jdbcType="VARCHAR"/>
+        <result property="zt" column="c_zt" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="getPositionOfferList" resultMap="positionModel">
+        select * from t_position
+    </select>
+
+</mapper>

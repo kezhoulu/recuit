@@ -8,9 +8,9 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>ITCAST - AdminLTE2定制版</title>
-<meta name="description" content="AdminLTE2定制版">
-<meta name="keywords" content="AdminLTE2定制版">
+<title>招聘管理系统首页</title>
+<meta name="description" content="招聘管理系统首页">
+<meta name="keywords" content="招聘管理系统首页">
 
 <meta
 	content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"
@@ -74,9 +74,9 @@
 
 		<!-- 内容区域 -->
 		<div class="content-wrapper">
-
-			<img src="${pageContext.request.contextPath}/img/center.jpg"
-				width="100%" height="90%" />
+			信息介绍
+			<%--<img src="${pageContext.request.contextPath}/img/center.jpg"
+				width="100%" height="80%" />--%>
 
 		</div>
 		<!-- 内容区域 /-->
@@ -84,11 +84,10 @@
 		<!-- 底部导航 -->
 		<footer class="main-footer">
 		<div class="pull-right hidden-xs">
-			<b>Version</b> 1.0.8
+			<b>Version</b> 1.0.0
 		</div>
 		<strong>Copyright &copy; 2014-2017
 		</strong> All rights reserved. </footer>
-		<!-- 底部导航 /-->
 	</div>
 
 	<script

@@ -15,6 +15,8 @@ public class UserModel {
 
     private boolean edit ;
 
+    private String right;
+
     public boolean getEdit() {
         return edit;
     }
@@ -30,11 +32,6 @@ public class UserModel {
     public void setRight(String right) {
         this.right = right;
     }
-
-    private String right;
-
-
-
 
     public String getId() {
         return id;

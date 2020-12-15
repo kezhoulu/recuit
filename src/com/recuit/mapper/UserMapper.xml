@@ -2,20 +2,54 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.recuit.mapper.UserMapper">
     <resultMap id="userModel" type="com.recuit.model.UserModel">
-        <result property="id" column="id" jdbcType="VARCHAR"/>
-        <result property="userName" column="username" jdbcType="VARCHAR"/>
-        <result property="passWord" column="password" jdbcType="VARCHAR"/>
-        <result property="email" column="email" jdbcType="VARCHAR"/>
-        <result property="phoneNum" column="phonenum" jdbcType="VARCHAR"/>
-        <result property="status" column="status" jdbcType="VARCHAR"/>
+        <result property="id" column="c_id" jdbcType="VARCHAR"/>
+        <result property="userName" column="c_username" jdbcType="VARCHAR"/>
+        <result property="passWord" column="c_password" jdbcType="VARCHAR"/>
+        <result property="email" column="c_email" jdbcType="VARCHAR"/>
+        <result property="phoneNum" column="c_phonenum" jdbcType="VARCHAR"/>
+        <result property="status" column="c_status" jdbcType="VARCHAR"/>
+        <result property="right" column="c_right" jdbcType="VARCHAR"/>
     </resultMap>
 
 
     <select id="getUserList" resultMap="userModel" >
         select * from t_users
+        <if test="username!=null">
+            where c_username like concat('%',#{username},'%')
+        </if>
+        order by c_id
     </select>
 
     <select id="getUserById" resultMap="userModel">
-        select * from t_users where id = #{id}
+        select * from t_users where c_id = #{id}
     </select>
+
+    <select id="getUserByUsername" resultMap="userModel">
+        select * from t_users where c_username=#{username} limit 1
+    </select>
+
+    <insert id="saveUser" parameterType="com.recuit.model.UserModel">
+        insert into t_users(c_id,c_username,c_password,c_email,c_phonenum,c_status,c_right)
+        values(
+            #{user.id},
+            #{user.userName},
+            #{user.passWord},
+            #{user.email},
+            #{user.phoneNum},
+            #{user.status},
+            #{user.right}
+        )
+    </insert>
+
+    <update id="updateUser" parameterType="com.recuit.model.UserModel">
+        update t_users set
+        c_username = #{user.userName},
+        c_password = #{user.passWord},
+        c_email =  #{user.email},
+        c_phonenum =  #{user.phoneNum},
+        c_status = #{user.status},
+        c_right = #{user.right}
+        where c_id = #{user.id}
+
+    </update>
 </mapper>

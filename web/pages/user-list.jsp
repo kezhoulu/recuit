@@ -8,9 +8,9 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>数据 - AdminLTE2定制版</title>
-<meta name="description" content="AdminLTE2定制版">
-<meta name="keywords" content="AdminLTE2定制版">
+<title>招聘管理系统</title>
+<meta name="description" content="招聘管理系统">
+<meta name="keywords" content="招聘管理系统">
 
 <!-- Tell the browser to be responsive to screen width -->
 <meta
@@ -90,7 +90,7 @@
 							<div class="pull-left">
 								<div class="form-group form-inline">
 									<div class="btn-group">
-										<button type="button" class="btn btn-default" title="新建" onclick="location.href='${pageContext.request.contextPath}/pages/user-edit.jsp'">
+										<button type="button" class="btn btn-default" title="新建" onclick="location.href='${pageContext.request.contextPath}/user/getUserById.do?edit=false'">
 											<i class="fa fa-file-o"></i> 新建
 										</button>
 										<button type="button" class="btn btn-default" title="刷新">
@@ -101,7 +101,7 @@
 							</div>
 							<div class="box-tools pull-right">
 								<div class="has-feedback">
-									<input type="text" class="form-control input-sm"
+									<input id="searchinput" type="text" class="form-control input-sm"
 										placeholder="支持用户名搜索"> <span
 										class="glyphicon glyphicon-search form-control-feedback"></span>
 								</div>
@@ -140,7 +140,7 @@
 					<div class="box-footer">
 						<div class="pull-left">
 							<div class="form-group form-inline">
-								总共${userList.pages }页，共${userList.total}条数据。 每页 <select class="form-control">
+								当前第${userList.pageNum}页，总共${userList.pages }页，共${userList.total}条数据。 每页 <select id="pagesize" class="form-control">
 								<c:choose>
 									<c:when test="${userList.pageSize == 10}">
 										<option selected="true">10</option>
@@ -171,10 +171,10 @@
 
 						<div class="box-tools pull-right">
 							<ul class="pagination">
-								<li><a href="#" aria-label="Previous">首页</a></li>
-								<li><a href="#">上一页</a></li>
-								<li><a href="#">下一页</a></li>
-								<li><a href="#" aria-label="Next">尾页</a></li>
+								<li><a href="#" onClick="fy(1)" aria-label="Previous">首页</a></li>
+								<li><a href="#" onClick="fy(${userList.prePage})">上一页</a></li>
+								<li><a href="#" onClick="fy(${userList.nextPage})">下一页</a></li>
+								<li><a href="#" onClick="fy(${userList.pages})" aria-label="Next">尾页</a></li>
 							</ul>
 						</div>
 
@@ -184,11 +184,10 @@
 			</div>
 			<footer class="main-footer">
 			<div class="pull-right hidden-xs">
-				<b>Version</b> 1.0.8
+				<b>Version</b> 1.0.0
 			</div>
-			<strong>Copyright &copy; 2020-2021 <a
-				href="http://www.itcast.cn">研究院研发部</a>.
-			</strong> All rights reserved. </footer>
+				<strong>Copyright &copy; 2014-2017
+				</strong> All rights reserved.  </footer>
 
 		</div>
 
@@ -240,58 +239,6 @@
 		<script src="../plugins/flot/jquery.flot.categories.min.js"></script>
 		<script src="../plugins/ionslider/ion.rangeSlider.min.js"></script>
 		<script src="../plugins/bootstrap-slider/bootstrap-slider.js"></script>
-		<script>
-			$(document).ready(function() {
-				// 选择框
-				$(".select2").select2();
-
-				// WYSIHTML5编辑器
-				$(".textarea").wysihtml5({
-					locale : 'zh-CN'
-				});
-			});
-
-			// 设置激活菜单
-			function setSidebarActive(tagUri) {
-				var liObj = $("#" + tagUri);
-				if (liObj.length > 0) {
-					liObj.parent().parent().addClass("active");
-					liObj.addClass("active");
-				}
-			}
-
-			$(document)
-					.ready(
-							function() {
-								// 激活导航位置
-								setSidebarActive("admin-datalist");
-								// 列表按钮
-								$("#dataList td input[type='checkbox']")
-										.iCheck(
-												{
-													checkboxClass : 'icheckbox_square-blue',
-													increaseArea : '20%'
-												});
-								// 全选操作 
-								$("#selall")
-										.click(
-												function() {
-													var clicks = $(this).is(
-															':checked');
-													if (!clicks) {
-														$(
-																"#dataList td input[type='checkbox']")
-																.iCheck(
-																		"uncheck");
-													} else {
-														$(
-																"#dataList td input[type='checkbox']")
-																.iCheck("check");
-													}
-													$(this).data("clicks",
-															!clicks);
-												});
-							});
-		</script>
+		<script src="../js/user-list.js"></script>
 </body>
 </html>

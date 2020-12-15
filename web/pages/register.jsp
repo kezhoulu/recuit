@@ -31,44 +31,43 @@
 		</div>
 		<!-- /.login-logo -->
 		<div class="login-box-body">
-			<p class="login-box-msg">登录系统</p>
+			<p class="login-box-msg">注册账号</p>
 
-			<form action="${pageContext.request.contextPath}/login" method="post">
+			<form action="${pageContext.request.contextPath}//user/register.do" method="post">
 				<div class="form-group has-feedback">
-					<input type="text" name="username" class="form-control"
+					<input type="text" name="username" class="form-control" required
 						placeholder="用户名"> <span
 						class="glyphicon glyphicon-envelope form-control-feedback"></span>
 				</div>
 				<div class="form-group has-feedback">
-					<input type="password" name="password" class="form-control"
+					<input type="text" name="password" class="form-control" required
 						placeholder="密码"> <span
 						class="glyphicon glyphicon-lock form-control-feedback"></span>
 				</div>
+				<div class="form-group has-feedback">
+					<select class="form-control select2 select2-hidden-accessible"
+							name="right"
+							id = "right"
+							data-placeholder="选择角色" style="width: 100%;" tabindex="-1" aria-hidden="true">
+						<option selected value="USER">普通用户</option>
+						<option value="COMPANY">公司用户</option>
+						<option value="ADMIN">管理员</option>
+					</select>
+				</div>
 				<div class="row">
-					<div class="col-xs-8">
-						<div class="checkbox icheck">
-							<label><input type="checkbox"> 记住 下次自动登录</label>
-						</div>
+					<div class="col-xs-4" style="margin-left: 100px;">
+						<button type="submit" class="btn btn-primary btn-block btn-flat">注册</button>
 					</div>
-					<!-- /.col -->
-					<div class="col-xs-4">
-						<button type="submit" class="btn btn-primary btn-block btn-flat">登录</button>
-					</div>
-					<!-- /.col -->
+				</div>
+				<div class="row">
+					<div>${message}</div>
 				</div>
 			</form>
-
-			<a href="#">忘记密码</a><br>
-
-
 		</div>
+
+
 		<!-- /.login-box-body -->
 	</div>
-	<!-- /.login-box -->
-
-	<!-- jQuery 2.2.3 -->
-	<!-- Bootstrap 3.3.6 -->
-	<!-- iCheck -->
 	<script
 		src="${pageContext.request.contextPath}/plugins/jQuery/jquery-2.2.3.min.js"></script>
 	<script

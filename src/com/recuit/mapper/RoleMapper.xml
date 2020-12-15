@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.recuit.mapper.RoleMapper">
+    <resultMap id="roleModel" type="com.recuit.model.RoleModel">
+        <result property="id" column="c_id" jdbcType="VARCHAR"/>
+        <result property="key" column="c_key" jdbcType="VARCHAR"/>
+        <result property="keyName" column="c_keyname" jdbcType="VARCHAR"/>
+        <result property="describe" column="c_describe" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="getRoleList" resultMap="roleModel">
+        select * from t_role
+        <if test="roleName!=null">
+            where c_keyname like concat('%',#{roleName},'%')
+        </if>
+
+    </select>
+
+    <select id="getRoleById" resultMap="roleModel">
+        select * from t_role where c_id = #{id} limit 1
+    </select>
+
+</mapper>

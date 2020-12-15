@@ -8,9 +8,9 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>数据 - AdminLTE2定制版</title>
-<meta name="description" content="AdminLTE2定制版">
-<meta name="keywords" content="AdminLTE2定制版">
+<title>招聘管理系统</title>
+<meta name="description" content="招聘管理系统">
+<meta name="keywords" content="招聘管理系统">
 
 <!-- Tell the browser to be responsive to screen width -->
 <meta
@@ -79,16 +79,9 @@
 			<!-- 内容头部 -->
 			<section class="content-header">
 			<h1>
-				角色管理 <small>全部角色</small>
+				系统管理 <small>角色管理</small>
 			</h1>
-			<ol class="breadcrumb">
-				<li><a href="${pageContext.request.contextPath}/index.jsp"><i
-						class="fa fa-dashboard"></i> 首页</a></li>
-				<li><a
-					href="${pageContext.request.contextPath}/role/findAll.do">角色管理</a></li>
 
-				<li class="active">全部角色</li>
-			</ol>
 			</section>
 			<!-- 内容头部 /-->
 
@@ -96,7 +89,7 @@
 				<section class="content"> <!-- .box-body -->
 				<div class="box box-primary">
 					<div class="box-header with-border">
-						<h3 class="box-title">列表</h3>
+						<h3 class="box-title">角色列表</h3>
 					</div>
 
 					<div class="box-body">
@@ -108,7 +101,7 @@
 							<div class="pull-left">
 								<div class="form-group form-inline">
 									<div class="btn-group">
-										<button type="button" class="btn btn-default" title="新建" onclick="location.href='${pageContext.request.contextPath}/pages/role-add.jsp'">
+										<button type="button" class="btn btn-default" title="新建" onclick="location.href='role-edit.jsp'">
 											<i class="fa fa-file-o"></i> 新建
 										</button>
 										
@@ -132,60 +125,35 @@
 								class="table table-bordered table-striped table-hover dataTable">
 								<thead>
 									<tr>
-										<th class="" style="padding-right: 0px"><input
-											id="selall" type="checkbox" class="icheckbox_square-blue">
-										</th>
-										<th class="sorting_asc">ID</th>
-										<th class="sorting_desc">角色名称</th>
-										<th class="sorting_asc sorting_asc_disabled">描述</th>										
+										<th class="text-center">ID</th>
+										<th class="text-center">角色关键字</th>
+										<th class="text-center">角色名称</th>
+										<th class="text-center">描述</th>
 										<th class="text-center">操作</th>
 									</tr>
 								</thead>
 								<tbody>
 
-									<c:forEach items="${roleList}" var="role">
+									<c:forEach items="${roleList.list}" var="role">
 										<tr>
-											<td><input name="ids" type="checkbox"></td>
-											<td>${role.id }</td>
-											<td>${role.roleName }</td>
-											<td>${role.roleDesc }</td>																				
+											<td class="text-center">${role.id }</td>
+											<td class="text-center">${role.key }</td>
+											<td class="text-center" >${role.keyName }</td>
+											<td class="text-center">${role.describe }</td>
 											<td class="text-center">
-												<a href="${pageContext.request.contextPath}/role/findById.do?id=${role.id}" class="btn bg-olive btn-xs">详情</a>
-												<a href="${pageContext.request.contextPath}/role/findRoleByIdAndAllPermission.do?id=${role.id}" class="btn bg-olive btn-xs">添加权限</a>
+												<a href="${pageContext.request.contextPath}/role/getRoleById.do?id=${role.id}&edit=true" class="btn bg-olive btn-xs">编辑</a>
+												<a href="${pageContext.request.contextPath}/role/deleteRoleById.do?id=${role.id}" class="btn bg-olive btn-xs">删除</a>
 											</td>
 										</tr>
 									</c:forEach>
 								</tbody>
-								<!--
-                            <tfoot>
-                            <tr>
-                            <th>Rendering engine</th>
-                            <th>Browser</th>
-                            <th>Platform(s)</th>
-                            <th>Engine version</th>
-                            <th>CSS grade</th>
-                            </tr>
-                            </tfoot>-->
 							</table>
-							<!--数据列表/-->
-
 						</div>
-						<!-- 数据表格 /-->
-
 					</div>
-					<!-- /.box-body -->
-
-					<!-- .box-footer-->
 					<div class="box-footer">
 						<div class="pull-left">
 							<div class="form-group form-inline">
-								总共2 页，共14 条数据。 每页 <select class="form-control">
-									<option>1</option>
-									<option>2</option>
-									<option>3</option>
-									<option>4</option>
-									<option>5</option>
-								</select> 条
+								当前第${roleList.pageNum }页，总共${roleList.pages } 页，共${roleList.total} 条数据。 每页10 条
 							</div>
 						</div>
 
@@ -193,11 +161,6 @@
 							<ul class="pagination">
 								<li><a href="#" aria-label="Previous">首页</a></li>
 								<li><a href="#">上一页</a></li>
-								<li><a href="#">1</a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">5</a></li>
 								<li><a href="#">下一页</a></li>
 								<li><a href="#" aria-label="Next">尾页</a></li>
 							</ul>
@@ -218,11 +181,10 @@
 			<!-- 底部导航 -->
 			<footer class="main-footer">
 			<div class="pull-right hidden-xs">
-				<b>Version</b> 1.0.8
+				<b>Version</b> 1.0.0
 			</div>
-			<strong>Copyright &copy; 2014-2017 <a
-				href="http://www.itcast.cn">研究院研发部</a>.
-			</strong> All rights reserved. </footer>
+			<<strong>Copyright &copy; 2014-2017
+			</strong> All rights reserved.  </footer>
 			<!-- 底部导航 /-->
 
 		</div>
@@ -295,40 +257,11 @@
 				}
 			}
 
-			$(document)
-					.ready(
-							function() {
-
-								// 激活导航位置
-								setSidebarActive("admin-datalist");
-
-								// 列表按钮 
-								$("#dataList td input[type='checkbox']")
-										.iCheck(
-												{
-													checkboxClass : 'icheckbox_square-blue',
-													increaseArea : '20%'
-												});
-								// 全选操作 
-								$("#selall")
-										.click(
-												function() {
-													var clicks = $(this).is(
-															':checked');
-													if (!clicks) {
-														$(
-																"#dataList td input[type='checkbox']")
-																.iCheck(
-																		"uncheck");
-													} else {
-														$(
-																"#dataList td input[type='checkbox']")
-																.iCheck("check");
-													}
-													$(this).data("clicks",
-															!clicks);
-												});
-							});
+			$(document).ready(
+					function() {
+						// 激活导航位置
+						setSidebarActive("role-setting");
+					});
 		</script>
 </body>
 

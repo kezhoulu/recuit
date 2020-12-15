@@ -1,8 +1,11 @@
 package com.recuit.controller;
 
 import com.github.pagehelper.PageInfo;
+import com.recuit.cache.UserCache;
 import com.recuit.model.UserModel;
 import com.recuit.service.UserService;
+import com.recuit.util.UUIDUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,13 +14,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * 用户角色处理类
  */
 @RequestMapping("/user")
 @Controller
 public class UserController {
-    Logger log = LoggerFactory.getLogger(this.getClass());
+    Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private UserService userService;
 
@@ -26,10 +31,10 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/user-list.do",method = RequestMethod.GET)
-    public ModelAndView getUserList(){
-        log.info("查找所有的用户信息");
+    public ModelAndView getUserList(int pageNum ,int pageSize ,String username){
+        logger.info("查找所有的用户信息");
         ModelAndView mv = new ModelAndView();
-        mv.addObject("userList" , new PageInfo<UserModel>(userService.getUserList()));
+        mv.addObject("userList" , new PageInfo<UserModel>(userService.getUserList(pageNum,pageSize, StringUtils.isBlank(username)?null:username)));
         mv.setViewName("/user-list");
         return mv;
     }
@@ -37,9 +42,7 @@ public class UserController {
     @RequestMapping(value = "/getUserById.do",method = RequestMethod.GET)
     public ModelAndView getUserById(String id,boolean edit){
         ModelAndView mv = new ModelAndView();
-        UserModel user = userService.getUserById(id);
-        user.setEdit(edit);
-        user.setRight("ADMIN,USER");
+        UserModel user =  userService.getUserById(id,edit);
         mv.addObject("user" , user);
         mv.setViewName("user-edit");
         return  mv;
@@ -47,9 +50,19 @@ public class UserController {
 
     @RequestMapping(value = "/save.do",method = RequestMethod.POST)
     public ModelAndView saveUser(UserModel user){
-
-        return null;
+        return userService.saveOrUpdateUser(user);
     }
 
+    @RequestMapping(value = "/register_url.do",method = RequestMethod.GET)
+    public ModelAndView register_url(){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/register");
+        return mv;
+    }
+
+    @RequestMapping(value = "/register.do",method = RequestMethod.POST)
+    public ModelAndView register(String username , String password , String right){
+        return userService.register(username,password,right);
+    }
 
 }

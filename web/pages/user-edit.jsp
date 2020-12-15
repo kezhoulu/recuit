@@ -149,6 +149,9 @@
 					<button type="button" class="btn bg-default"
 						onclick="history.back(-1);">返回</button>
 				</div>
+				<div>
+					${message}
+				</div>
 				<!--工具栏/--> </section>
 				<!-- 正文区域 /-->
 			</form>

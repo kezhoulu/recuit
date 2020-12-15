@@ -62,7 +62,7 @@
 	href="${pageContext.request.contextPath}/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.css">
 </head>
 
-	<body class="hold-transition skin-purple sidebar-mini">
+	<body class="hold-transition skin-blue sidebar-mini">
 
 	<div class="wrapper">
 
@@ -79,14 +79,8 @@
 			<!-- 内容头部 -->
 			<section class="content-header">
 			<h1>
-				角色管理 <small>角色表单</small>
+				 系统管理<small>角色管理</small>
 			</h1>
-			<ol class="breadcrumb">
-				<li><a href="${pageContext.request.contextPath}/index.jsp"><i
-						class="fa fa-dashboard"></i> 首页</a></li>
-				<li><a href="${pageContext.request.contextPath}/role/findAll.do">角色管理</a></li>
-				<li class="active">角色表单</li>
-			</ol>
 			</section>
 			<!-- 内容头部 /-->
 
@@ -104,13 +98,16 @@
 							<input type="text" class="form-control" name="roleName"
 								placeholder="角色名称" value="">
 						</div>
-						<div class="col-md-2 title">角色描述</div>
+						<div class="col-md-2 title">角色KEY</div>
 						<div class="col-md-4 data">
 							<input type="text" class="form-control" name="roleDesc"
 								placeholder="角色描述" value="">
 						</div>
-										
-
+						<div class="col-md-2 title">角色描述</div>
+						<div class="col-md-4 data">
+							<input type="text" class="form-control" name="roleDesc"
+								   placeholder="角色描述" value="">
+						</div>
 					</div>
 				</div>
 				<!--订单信息/--> <!--工具栏-->
@@ -233,6 +230,8 @@
 			$(".textarea").wysihtml5({
 				locale : 'zh-CN'
 			});
+
+			setSidebarActive("role-setting");
 		});
 
 		// 设置激活菜单

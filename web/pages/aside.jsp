@@ -30,11 +30,11 @@
 			</a>
 				<ul class="treeview-menu">
 					<li id="user-setting"><a
-						href="${pageContext.request.contextPath}/user/user-list.do"> <i
+						href="${pageContext.request.contextPath}/user/user-list.do?pageNum=1&pageSize=10&username="> <i
 							class="fa fa-circle-o"></i> 用户管理
 					</a></li>
 					<li id="role-setting"><a
-						href="${pageContext.request.contextPath}/role/findAll.do"> <i
+						href="${pageContext.request.contextPath}/role/role-list.do?pageNum=1&username="> <i
 							class="fa fa-circle-o"></i> 角色管理
 					</a></li>
 				</ul>
@@ -48,11 +48,11 @@
 				<ul class="treeview-menu">
 
 					<li id="system-zwfb"><a
-						href="${pageContext.request.contextPath}/product/findAll.do">
+						href="${pageContext.request.contextPath}/position-offer/position-offer-list.do">
 							<i class="fa fa-circle-o"></i> 职位发布
 					</a></li>
 					<li id="system-zwsq"><a
-						href="${pageContext.request.contextPath}/orders/findAll.do?page=1&size=4"> <i
+						href="${pageContext.request.contextPath}/position/position-list.do"> <i
 							class="fa fa-circle-o"></i> 职位申请
 					</a></li>
 				</ul></li>

@@ -31,11 +31,11 @@ public class UserCache {
 
         try {
             List<Element> elements = new ArrayList<>();
-            List<UserModel> userList = userNapper.getUserList();
+            List<UserModel> userList = userNapper.getUserList(null);
 
 
             for (UserModel user : userList) {
-                net.sf.ehcache.Element item = new net.sf.ehcache.Element(user.getId(),user);
+                net.sf.ehcache.Element item = new net.sf.ehcache.Element(user.getUserName(),user);
                 elements.add(item);
             }
             Cache c = CacheUtil.getCache("userCache");
@@ -48,17 +48,31 @@ public class UserCache {
         }
     }
 
-    public UserModel getUserCache(String id) {
+    public UserModel getUserCache(String userName) {
         try {
             this.readLock();
             net.sf.ehcache.Element element = CacheUtil.getCache("userCache")
-                    .get(id);
+                    .get(userName);
             if (element == null)
                 return null;
             return (UserModel) element.getObjectValue();
         } finally {
             this.readRelease();
         }
+    }
+
+    public void updateCache(UserModel user){
+        try{
+            net.sf.ehcache.Element item = new net.sf.ehcache.Element(user.getUserName(),user);
+            Cache c = CacheUtil.getCache("userCache");
+            this.writeLock();
+            c.put(item);
+        }catch (Exception e){
+            logger.error("更新缓存失败",e);
+        }finally {
+            this.writeRelease();
+        }
+
     }
 
 
