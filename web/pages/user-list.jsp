@@ -102,7 +102,7 @@
 							<div class="box-tools pull-right">
 								<div class="has-feedback">
 									<input id="searchinput" type="text" class="form-control input-sm"
-										placeholder="支持用户名搜索"> <span
+										placeholder="支持用户名搜索" value="${username}"> <span
 										class="glyphicon glyphicon-search form-control-feedback"></span>
 								</div>
 							</div>
@@ -122,7 +122,7 @@
 								<tbody>
 									<c:forEach items="${userList.list}" var="user">
 										<tr>
-											<td class="text-center">${user.id }</td>
+											<td class="text-center" title="${user.id }">${user.id }</td>
 											<td class="text-center">${user.userName }</td>
 											<td class="text-center">${user.email }</td>
 											<td class="text-center">${user.phoneNum }</td>

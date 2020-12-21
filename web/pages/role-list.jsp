@@ -101,7 +101,7 @@
 							<div class="pull-left">
 								<div class="form-group form-inline">
 									<div class="btn-group">
-										<button type="button" class="btn btn-default" title="新建" onclick="location.href='role-edit.jsp'">
+										<button type="button" class="btn btn-default" title="新建" onclick="location.href='${pageContext.request.contextPath}/role/getRoleById.do?id=&edit=false'">
 											<i class="fa fa-file-o"></i> 新建
 										</button>
 										
@@ -113,8 +113,8 @@
 							</div>
 							<div class="box-tools pull-right">
 								<div class="has-feedback">
-									<input type="text" class="form-control input-sm"
-										placeholder="搜索"> <span
+									<input type="text" id="searchinput" class="form-control input-sm"
+										placeholder="根据角色名称搜索" value="${roleName}"> <span
 										class="glyphicon glyphicon-search form-control-feedback"></span>
 								</div>
 							</div>
@@ -159,10 +159,10 @@
 
 						<div class="box-tools pull-right">
 							<ul class="pagination">
-								<li><a href="#" aria-label="Previous">首页</a></li>
-								<li><a href="#">上一页</a></li>
-								<li><a href="#">下一页</a></li>
-								<li><a href="#" aria-label="Next">尾页</a></li>
+								<li><a href="#" onClick="fy(1)" aria-label="Previous">首页</a></li>
+								<li><a href="#" onClick="fy(${roleList.prePage})" >上一页</a></li>
+								<li><a href="#" onClick="fy(${roleList.nextPage})">下一页</a></li>
+								<li><a href="#" onClick="fy(${roleList.pages})" aria-label="Next">尾页</a></li>
 							</ul>
 						</div>
 
@@ -237,32 +237,7 @@
 		<script src="../plugins/flot/jquery.flot.categories.min.js"></script>
 		<script src="../plugins/ionslider/ion.rangeSlider.min.js"></script>
 		<script src="../plugins/bootstrap-slider/bootstrap-slider.js"></script>
-		<script>
-			$(document).ready(function() {
-				// 选择框
-				$(".select2").select2();
-
-				// WYSIHTML5编辑器
-				$(".textarea").wysihtml5({
-					locale : 'zh-CN'
-				});
-			});
-
-			// 设置激活菜单
-			function setSidebarActive(tagUri) {
-				var liObj = $("#" + tagUri);
-				if (liObj.length > 0) {
-					liObj.parent().parent().addClass("active");
-					liObj.addClass("active");
-				}
-			}
-
-			$(document).ready(
-					function() {
-						// 激活导航位置
-						setSidebarActive("role-setting");
-					});
-		</script>
+		<script src="../js/role-list.js"></script>
 </body>
 
 </html>

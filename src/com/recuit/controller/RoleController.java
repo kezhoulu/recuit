@@ -28,6 +28,7 @@ public class RoleController {
     public ModelAndView getRoleList(int pageNum,String roleName){
         ModelAndView mv = new ModelAndView();
         mv.addObject("roleList" , new PageInfo<RoleModel>(roleService.getRoleList(pageNum, StringUtils.isNotBlank(roleName)?roleName:null)));
+        mv.addObject("roleName",roleName);
         mv.setViewName("/role-list");
         return mv;
     }
@@ -35,5 +36,10 @@ public class RoleController {
     @RequestMapping(value = "/getRoleById.do",method = RequestMethod.GET)
     public ModelAndView getRoleById(String id,boolean edit){
         return roleService.getRoleById(id,edit);
+    }
+
+    @RequestMapping(value = "/save.do",method = RequestMethod.POST)
+    public ModelAndView saveRole(RoleModel role){
+        return roleService.saveOrUpdateRole(role);
     }
 }

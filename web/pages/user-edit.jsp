@@ -103,10 +103,15 @@
 					<div class="panel-heading">用户信息</div>
 					<div class="row data-type">
 
-						<div class="col-md-2 title">用户名称</div>
+						<div class="col-md-2 title">登录名</div>
 						<div class="col-md-4 data">
 							<input type="text" class="form-control" name="userName"
 								placeholder="用户名称" value="${user.userName}">
+						</div>
+						<div class="col-md-2 title">用户名称</div>
+						<div class="col-md-4 data">
+							<input type="text" class="form-control" name="userNameCn"
+								   placeholder="用户名称" value="${user.userNameCn}">
 						</div>
 						<div class="col-md-2 title">密码</div>
 						<div class="col-md-4 data">

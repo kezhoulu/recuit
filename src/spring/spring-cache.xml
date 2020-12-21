@@ -9,5 +9,5 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 http://www.springframework.org/schema/context
 http://www.springframework.org/schema/context/spring-context-2.5.xsd">
     <bean id="userCache" class="com.recuit.cache.UserCache" init-method="reload"/>
-
+    <bean id="codeCache" class="com.recuit.cache.CodeCache" init-method="reload"/>
 </beans>

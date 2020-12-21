@@ -16,4 +16,10 @@ public interface UserMapper {
     void updateUser(@Param("user") UserModel user);
 
     UserModel getUserByUsername(String username);
+
+    void updateExtUser(@Param("user")UserModel user);
+
+    UserModel getExtUserById(String id);
+
+    void insertExtUser(@Param("user")UserModel user);
 }

@@ -1,17 +1,23 @@
 package com.recuit.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.recuit.aop.annotation.Convert;
 import com.recuit.cache.UserCache;
+import com.recuit.config.PropertyConfigUtil;
 import com.recuit.mapper.UserMapper;
 import com.recuit.model.UserModel;
 import com.recuit.service.UserService;
 import com.recuit.util.UUIDUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -31,6 +37,7 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
+    @Convert
     public List<UserModel> getUserList(int pageNum, int pageSize, String username) {
 
         PageHelper.startPage(pageNum,pageSize);
@@ -132,6 +139,27 @@ public class UserServiceImpl implements UserService {
         userCache.updateCache(rUser);
         mv.setViewName("/login");
         return mv;
+    }
+
+    @Override
+    public UserModel updateSubmit(MultipartFile files , UserModel user) throws IOException {
+        if(files!=null){
+            String destFileName = files.getOriginalFilename();
+            String destPath = PropertyConfigUtil.getProperty("file.path");
+            String destFile = destPath+ File.separator+destFileName;
+            //目前保存在本地，可迁移至ftp或minio
+            files.transferTo(new File(destFile));
+            user.setJlmc(destFileName);
+            user.setJldz(destFile);
+        }
+        UserModel user1 = userMapper.getExtUserById(user.getId());
+        if(user1 == null){
+            user.setExtId(UUIDUtil.getUuid());
+            userMapper.insertExtUser(user);
+        }else{
+            userMapper.updateExtUser(user);
+        }
+        return user;
     }
 
 }

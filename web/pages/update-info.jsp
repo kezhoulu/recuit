@@ -62,7 +62,7 @@
 	href="${pageContext.request.contextPath}/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.css">
 </head>
 
-	<body class="hold-transition skin-purple sidebar-mini">
+	<body class="hold-transition skin-blue sidebar-mini">
 
 	<div class="wrapper">
 
@@ -79,45 +79,60 @@
 			<!-- 内容头部 -->
 			<section class="content-header">
 			<h1>
-				资源权限管理 <small>资源权限表单</small>
+				 系统管理<small>角色管理</small>
 			</h1>
-			<ol class="breadcrumb">
-				<li><a href="${pageContext.request.contextPath}/index.jsp"><i
-						class="fa fa-dashboard"></i> 首页</a></li>
-				<li><a href="${pageContext.request.contextPath}/permission/findAll.do">资源权限管理</a></li>
-				<li class="active">资源权限表单</li>
-			</ol>
 			</section>
 			<!-- 内容头部 /-->
 
-			<form action="${pageContext.request.contextPath}/permission/save.do"
-				method="post">
+			<form action="${pageContext.request.contextPath}/user/update-submit.do"
+				method="post" enctype="multipart/form-data">
 				<!-- 正文区域 -->
 				<section class="content"> <!--产品信息-->
 
 				<div class="panel panel-default">
-					<div class="panel-heading">资源权限信息</div>
+					<div class="panel-heading">信息登记</div>
 					<div class="row data-type">
 
-						<div class="col-md-2 title">权限名称</div>
+						<div class="col-md-2 title">毕业院校</div>
+						<input type="text" name="id" style="display:none" value="${user.id}"/>
+						<input type="text" name="extId" style="display:none" value="${user.extId}"/>
+						<input type="text" name="jldz" style="display:none" value="${user.jldz}"/>
 						<div class="col-md-4 data">
-							<input type="text" class="form-control" name="permissionName"
-								placeholder="权限名称" value="">
+							<input type="text" class="form-control" name="byxx"
+								placeholder="毕业院校" value="${user.byxx}">
 						</div>
-						<div class="col-md-2 title">RUL</div>
+						<div class="col-md-2 title">出生年月</div>
 						<div class="col-md-4 data">
-							<input type="text" class="form-control" name="url"
-								placeholder="URL" value="">
+							<input type="text" class="form-control" name="csny"
+								placeholder="出生年月" value="${user.csny}">
 						</div>
-										
-
+						<div class="col-md-2 title">应聘岗位</div>
+						<div class="col-md-4 data">
+							<input type="text" class="form-control" name="ypgw"
+								   placeholder="应聘岗位" value="${user.ypgw}">
+						</div>
+						<div class="col-md-2 title">上传简历</div>
+						<div class="col-md-4 data">
+								<input type="file" value="" class="form-control" name="files">
+						</div>
+						<div class="col-md-2 title" >已上传简历</div>
+						<div class="col-md-4 data">
+							<input readonly type="text" class="form-control" name="jlmc"
+								   placeholder="已上传简历" value="${user.jlmc}">
+						</div>
+						<div class="col-md-2 title">工作经历</div>
+						<div class="col-md-4 data">
+							<textarea name="gzjl" class="form-control" rows="10" placeholder="工作经历 ...">
+								${user.gzjl}
+							</textarea>
+						</div>
 					</div>
 				</div>
 				<!--订单信息/--> <!--工具栏-->
 				<div class="box-tools text-center">
-					<button type="submit" class="btn bg-maroon">保存</button>
+					<button type="submit" class="btn bg-blue">保存</button>
 					<button type="button" class="btn bg-default"
-						onclick="history.back(-1);">返回</button>
+						onclick="/pages/main.jsp">返回</button>
 				</div>
 				<!--工具栏/--> </section>
 				<!-- 正文区域 /-->
@@ -128,11 +143,10 @@
 		<!-- 底部导航 -->
 		<footer class="main-footer">
 		<div class="pull-right hidden-xs">
-			<b>Version</b> 1.0.8
+			<b>Version</b> 1.0.0
 		</div>
-		<strong>Copyright &copy; 2014-2017 <a
-			href="http://www.itcast.cn">研究院研发部</a>.
-		</strong> All rights reserved. </footer>
+			<<strong>Copyright &copy; 2014-2017
+		</strong> All rights reserved.  </footer>
 		<!-- 底部导航 /-->
 
 	</div>
@@ -225,24 +239,7 @@
 		src="${pageContext.request.contextPath}/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
 
 	<script>
-		$(document).ready(function() {
-			// 选择框
-			$(".select2").select2();
 
-			// WYSIHTML5编辑器
-			$(".textarea").wysihtml5({
-				locale : 'zh-CN'
-			});
-		});
-
-		// 设置激活菜单
-		function setSidebarActive(tagUri) {
-			var liObj = $("#" + tagUri);
-			if (liObj.length > 0) {
-				liObj.parent().parent().addClass("active");
-				liObj.addClass("active");
-			}
-		}
 
 	</script>
 	

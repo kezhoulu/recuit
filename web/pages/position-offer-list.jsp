@@ -116,8 +116,8 @@
 							</div>
 							<div class="box-tools pull-right">
 								<div class="has-feedback">
-									<input type="text" class="form-control input-sm"
-										placeholder="搜索"> <span
+									<input id="searchinput" type="text" class="form-control input-sm"
+										placeholder="岗位名称搜索" value="${gwmc}"> <span
 										class="glyphicon glyphicon-search form-control-feedback"></span>
 								</div>
 							</div>
@@ -142,13 +142,13 @@
 								<tbody>
 									<c:forEach items="${pOfferList.list}" var="position">
 										<tr>
-											<td class="text-center">${position.id }</td>
-											<td class="text-center">${position.gwmc }</td>
-											<td class="text-center">${position.ssgs }</td>
-											<td class="text-center">${position.gzdd }</td>
-											<td class="text-center">${position.gznx }</td>
-											<td class="text-center">${position.zpxq }</td>
-											<td class="text-center">${position.zt}</td>
+											<td class="text-center rowWidth" title="${position.id }">${position.id }</td>
+											<td class="text-center rowWidth" title="${position.gwmc }">${position.gwmc }</td>
+											<td class="text-center rowWidth">${position.ssgs }</td>
+											<td class="text-center rowWidth">${position.gzdd }</td>
+											<td class="text-center rowWidth">${position.gznx }</td>
+											<td class="text-center rowWidth" title="${position.zpxq }">${position.zpxq }</td>
+											<td class="text-center rowWidth">${position.zt}</td>
 											<td class="text-center">
 												<button type="button" onclick="location.href='${pageContext.request.contextPath}/position-offer/getPositionById.do?id=${position.id}&edit=true'" class="btn bg-olive btn-xs">编辑</button>
 												<button type="button" onclick="location.href='${pageContext.request.contextPath}/position-offer/deletePositionById.do?id=${position.id}'" class="btn bg-olive btn-xs">删除</button>
@@ -168,7 +168,7 @@
 					<div class="box-footer">
 						<div class="pull-left">
 							<div class="form-group form-inline">
-								总共${pOfferList.pages }页，共${pOfferList.total}条数据。 每页 <select class="form-control">
+								当前第${pOfferList.pageNum}页，总共${pOfferList.pages }页，共${pOfferList.total}条数据。 每页 <select id="pagesize"  class="form-control">
 								<c:choose>
 									<c:when test="${pOfferList.pageSize == 10}">
 										<option selected="true">10</option>
@@ -199,10 +199,10 @@
 
 						<div class="box-tools pull-right">
 							<ul class="pagination">
-								<li><a href="#" aria-label="Previous">首页</a></li>
-								<li><a href="#">上一页</a></li>
-								<li><a href="#">下一页</a></li>
-								<li><a href="#" aria-label="Next">尾页</a></li>
+								<li><a href="#"  onClick="fy(1)" aria-label="Previous">首页</a></li>
+								<li><a href="#" onClick="fy(${pOfferList.prePage})">上一页</a></li>
+								<li><a href="#" onClick="fy(${pOfferList.nextPage})">下一页</a></li>
+								<li><a href="#" onClick="fy(${pOfferList.pages})" aria-label="Next">尾页</a></li>
 							</ul>
 						</div>
 
@@ -320,33 +320,8 @@
 		src="${pageContext.request.contextPath}/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/plugins/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js"></script>
-	<script>
-		$(document).ready(function() {
-			// 选择框
-			$(".select2").select2();
-
-			// WYSIHTML5编辑器
-			$(".textarea").wysihtml5({
-				locale : 'zh-CN'
-			});
-		});
-
-		// 设置激活菜单
-		function setSidebarActive(tagUri) {
-			var liObj = $("#" + tagUri);
-			if (liObj.length > 0) {
-				liObj.parent().parent().addClass("active");
-				liObj.addClass("active");
-			}
-		}
-
-		$(document).ready(function() {
-
-			// 激活导航位置
-			setSidebarActive("system-zwfb");
-
-		});
-	</script>
+	<script
+			src="${pageContext.request.contextPath}/js/position-offer-list.js"></script>
 </body>
 
 </html>

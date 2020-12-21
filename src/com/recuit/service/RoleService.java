@@ -20,4 +20,6 @@ public interface RoleService {
      * @return
      */
     ModelAndView getRoleById(String id, boolean edit);
+
+    ModelAndView saveOrUpdateRole(RoleModel role);
 }

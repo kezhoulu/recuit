@@ -79,76 +79,54 @@
 			<!-- 内容头部 -->
 			<section class="content-header">
 			<h1>
-				产品管理 <small>产品表单</small>
+				招聘信息 <small>职位发布</small>
 			</h1>
-			<ol class="breadcrumb">
-				<li><a href="${pageContext.request.contextPath}/index.jsp"><i
-						class="fa fa-dashboard"></i> 首页</a></li>
-				<li><a
-					href="${pageContext.request.contextPath}/product/findAll.do">产品管理</a></li>
-				<li class="active">产品表单</li>
-			</ol>
 			</section>
 			<!-- 内容头部 /-->
 
-			<form action="${pageContext.request.contextPath}/product/save.do"
+			<form action="${pageContext.request.contextPath}/position-offer/save.do"
 				method="post">
 				<!-- 正文区域 -->
 				<section class="content"> <!--产品信息-->
 
 				<div class="panel panel-default">
-					<div class="panel-heading">产品信息</div>
+					<div class="panel-heading">岗位信息</div>
 					<div class="row data-type">
-
-						<div class="col-md-2 title">产品编号</div>
+						<input type="text" name="edit" style="display:none" value="${position.edit}"/>
+						<input type="text" name="id" style="display:none" value="${position.id}"/>
+						<input id="statusvalue" type="text" style="display:none" value="${position.zt}"/>
+						<div class="col-md-2 title">岗位名称</div>
 						<div class="col-md-4 data">
-							<input type="text" class="form-control" name="productNum"
-								placeholder="产品编号" value="">
+							<input type="text" class="form-control" name="gwmc"
+								placeholder="岗位名称" value="${position.gwmc}">
 						</div>
-						<div class="col-md-2 title">产品名称</div>
+						<div class="col-md-2 title">工作地点</div>
 						<div class="col-md-4 data">
-							<input type="text" class="form-control" name="productName"
-								placeholder="产品名称" value="">
-						</div>
-						<div class="col-md-2 title">出发时间</div>
-						<div class="col-md-4 data">
-							<div class="input-group date">
-								<div class="input-group-addon">
-									<i class="fa fa-calendar"></i>
-								</div>
-								<input type="text" class="form-control pull-right"
-									id="datepicker-a3" name="departureTime">
-							</div>
+							<input type="text" class="form-control" name="gzdd"
+								placeholder="工作地点" value="${position.gzdd}">
 						</div>
 
 
-						<div class="col-md-2 title">出发城市</div>
-						<div class="col-md-4 data">
-							<input type="text" class="form-control" name="cityName"
-								placeholder="出发城市" value="">
-						</div>
 
-						<div class="col-md-2 title">产品价格</div>
+						<div class="col-md-2 title">工作年限</div>
 						<div class="col-md-4 data">
-							<input type="text" class="form-control" placeholder="产品价格"
-								name="productPrice" value="">
+							<input type="text" class="form-control" name="gznx"
+								placeholder="工作年限" value="${position.gznx}">
 						</div>
-
-						<div class="col-md-2 title">产品状态</div>
+						<div class="col-md-2 title">状态</div>
 						<div class="col-md-4 data">
-							<select class="form-control select2" style="width: 100%"
-								name="productStatus">
-								<option value="0" selected="selected">关闭</option>
+							<select id ="status" class="form-control select2" style="width: 100%"
+									name="zt">
+								<option value="0">关闭</option>
 								<option value="1">开启</option>
 							</select>
 						</div>
-
-						<div class="col-md-2 title rowHeight2x">其他信息</div>
-						<div class="col-md-10 data rowHeight2x">
-							<textarea class="form-control" rows="3" placeholder="其他信息"
-								name="productDesc"></textarea>
+						<div class="col-md-2 title">详情</div>
+						<div class="col-md-4 data">
+							<textarea name="zpxq" class="form-control" rows="10" placeholder="输入详情 ...">
+								${position.zpxq}
+							</textarea>
 						</div>
-
 					</div>
 				</div>
 				<!--订单信息/--> <!--工具栏-->
@@ -283,22 +261,21 @@
 		}
 
 		$(document).ready(function() {
-			$('#datepicker-a3').datetimepicker({
-				format : "yyyy-mm-dd hh:ii",
-				autoclose : true,
-				todayBtn : true,
-				language : "zh-CN"
-			});
+			// 激活导航位置
+			setSidebarActive("system-zwfb");
 		});
 
-		$(document).ready(function() {
-			// 激活导航位置
-			setSidebarActive("order-manage");
-			$("#datepicker-a3").datetimepicker({
-				format : "yyyy-mm-dd hh:ii",
-
-			});
-
+		//给select标签赋值
+		$(function () {
+			var status =   $("#statusvalue").val();
+			$("#status option").each(function(){
+				var value = $(this).attr("value");
+				var text = $(this).context.innerHTML;
+				if(status!=null && status.indexOf(value) != -1){
+					$(this).remove();
+					$("#status").append("<option selected value="+value+">"+text+"</option>");
+				}
+			})
 		});
 	</script>
 

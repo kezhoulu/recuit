@@ -46,15 +46,24 @@
 				</span>
 			</a>
 				<ul class="treeview-menu">
-
+					<security:authorize access="hasAnyRole('COMPANY')">
 					<li id="system-zwfb"><a
-						href="${pageContext.request.contextPath}/position-offer/position-offer-list.do">
+						href="${pageContext.request.contextPath}/position-offer/position-offer-list.do?pageNum=1&pageSize=10&gwmc=">
 							<i class="fa fa-circle-o"></i> 职位发布
 					</a></li>
+					</security:authorize>
+					<security:authorize access="hasAnyRole('USER')">
 					<li id="system-zwsq"><a
-						href="${pageContext.request.contextPath}/position/position-list.do"> <i
+						href="${pageContext.request.contextPath}/position-offer/position-list.do?pageNum=1&pageSize=10&gwmc="> <i
 							class="fa fa-circle-o"></i> 职位申请
 					</a></li>
+					</security:authorize>
+					<security:authorize access="hasAnyRole('COMPANY','USER')">
+					<li id="system-sqjl"><a
+							href="${pageContext.request.contextPath}/position-offer/position-sq-list.do?pageNum=1&pageSize=10&gwmc="> <i
+							class="fa fa-circle-o"></i> 申请记录
+					</a></li>
+					</security:authorize>
 				</ul></li>
 		</ul>
 	</section>

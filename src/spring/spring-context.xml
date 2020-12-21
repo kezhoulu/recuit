@@ -12,8 +12,8 @@
    http://www.springframework.org/schema/aop
    http://www.springframework.org/schema/aop/spring-aop.xsd">
 	<!-- *.properties配置文件加载 -->
-	<bean id="arteryConfigProperties"
-		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+	<bean id="configProperties"
+		class="com.recuit.config.PropertyConfigUtil">
 		<property name="ignoreResourceNotFound" value="true" />
 		<property name="locations">
 			<list>
@@ -88,6 +88,7 @@
 					  </value>
 				  </property>
 			  </bean>
+			  <bean class="com.recuit.interceptor.RightInterceptor" />
 		  </array>
 	  </property>
   </bean>
@@ -95,4 +96,5 @@
     <property name="basePackage" value="com.recuit.mapper" />
     <property name="sqlSessionFactoryBeanName" value="mybatisSessionFactory" />
   </bean>
+
 </beans>

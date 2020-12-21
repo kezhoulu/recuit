@@ -36,6 +36,16 @@ public class PositionModel {
      */
     private String zt;
 
+    private boolean edit;
+
+    public boolean getEdit(){
+        return this.edit;
+    }
+
+    public void setEdit(boolean edit){
+        this.edit = edit;
+    }
+
 
     public String getId() {
         return id;

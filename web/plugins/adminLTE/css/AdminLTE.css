@@ -13,6 +13,9 @@ html,
 body {
   height: 100%;
 }
+table{
+  table-layout: fixed;
+}
 .layout-boxed html,
 .layout-boxed body {
   height: 100%;
@@ -22,6 +25,11 @@ body {
   font-weight: 400;
   overflow-x: hidden;
   overflow-y: auto;
+}
+.rowWidth{
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
 /* Layout */
 .wrapper {

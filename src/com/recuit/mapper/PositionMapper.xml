@@ -13,6 +13,28 @@
 
     <select id="getPositionOfferList" resultMap="positionModel">
         select * from t_position
+        <if test="gwmc!=null">
+            where c_gwmc like concat('%',#{gwmc},'%')
+        </if>
     </select>
+
+    <select id="getPositionById" resultMap="positionModel">
+        select * from t_position where c_id =#{id} limit 1
+    </select>
+
+    <update id="updatePosition" parameterType="com.recuit.model.PositionModel">
+        update t_position set
+        c_gzdd = #{position.gzdd},
+        c_gznx = #{position.gznx},
+        c_zpxq = #{position.zpxq},
+        c_gwmc = #{position.gwmc},
+        c_ssgs = #{position.ssgs},
+        c_zt = #{position.zt}
+        where c_id = #{position.id}
+    </update>
+    <insert id="savePosition" parameterType="com.recuit.model.PositionModel">
+        insert into t_position(c_id,c_gzdd,c_gznx,c_zpxq,c_gwmc,c_ssgs,c_zt) values
+        (#{position.id},#{position.gzdd},#{position.gznx},#{position.zpxq},#{position.gwmc},#{position.ssgs},#{position.zt});
+    </insert>
 
 </mapper>

@@ -1,8 +1,10 @@
 package com.recuit.service;
 
 import com.recuit.model.UserModel;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface UserService {
@@ -38,4 +40,6 @@ public interface UserService {
     ModelAndView saveOrUpdateUser(UserModel user);
 
     ModelAndView register(String username, String password, String right);
+
+    UserModel updateSubmit(MultipartFile files , UserModel user) throws IOException;
 }

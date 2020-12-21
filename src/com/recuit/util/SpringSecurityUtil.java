@@ -1,5 +1,7 @@
 package com.recuit.util;
 
+import com.recuit.cache.util.CacheUtil;
+import com.recuit.model.UserModel;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -7,10 +9,21 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.servlet.http.HttpSession;
 
 public class SpringSecurityUtil {
-    public static UserDetails currentUser() {
+    /**
+     * 获取当前登录人信息
+     * @return
+     */
+    public static UserModel currentUser() {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext()
                 .getAuthentication()
                 .getPrincipal();
-        return userDetails;
+        if(userDetails.getUsername()==null){
+            return null;
+        }
+        net.sf.ehcache.Element element = CacheUtil.getCache("userCache")
+                .get(userDetails.getUsername());
+        if (element == null)
+            return null;
+        return (UserModel) element.getObjectValue();
     }
 }

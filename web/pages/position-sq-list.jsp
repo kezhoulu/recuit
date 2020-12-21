@@ -81,7 +81,7 @@
         <!-- 内容头部 -->
         <section class="content-header">
             <h1>
-                招聘信息 <small>职位申请</small>
+                招聘信息 <small>申请记录</small>
             </h1>
         </section>
         <!-- 内容头部 /-->
@@ -113,26 +113,20 @@
                                class="table table-bordered table-striped table-hover dataTable">
                             <thead>
                             <tr>
-                                <th class="text-center">ID</th>
-                                <th class="text-center">岗位名称</th>
-                                <th class="text-center">所属公司</th>
-                                <th class="text-center">工作地点</th>
-                                <th class="text-center">工作年限</th>
-                                <th class="text-center">招聘详情</th>
-                                <th class="text-center">状态</th>
+                                <th class="text-center">申请人</th>
+                                <th class="text-center">申请时间</th>
+                                <th class="text-center">申请岗位</th>
+                                <th class="text-center">申请公司</th>
                                 <th class="text-center">操作</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach items="${pOfferList.list}" var="position">
+                            <c:forEach items="${sqList.list}" var="position">
                                 <tr>
-                                    <td class="text-center rowWidth" title="${position.id }">${position.id }</td>
-                                    <td class="text-center rowWidth" title="${position.gwmc }">${position.gwmc }</td>
-                                    <td class="text-center rowWidth">${position.ssgs }</td>
-                                    <td class="text-center rowWidth">${position.gzdd }</td>
-                                    <td class="text-center rowWidth">${position.gznx }</td>
-                                    <td class="text-center rowWidth" title="${position.zpxq }">${position.zpxq }</td>
-                                    <td class="text-center rowWidth">${position.zt}</td>
+                                    <td class="text-center rowWidth">${position.userName }</td>
+                                    <td class="text-center rowWidth">${position.sqrq }</td>
+                                    <td class="text-center rowWidth">${position.sqgw }</td>
+                                    <td class="text-center rowWidth">${position.sqgs}</td>
                                     <td class="text-center">
                                         <button type="button" onclick="location.href='${pageContext.request.contextPath}/position-offer/getPositionById.do?id=${position.id}&edit=true'" class="btn bg-olive btn-xs">详情</button>
                                         <button type="button" onclick="location.href='${pageContext.request.contextPath}/position-offer/offerPositionById.do?id=${position.id}'" class="btn bg-olive btn-xs">申请</button>
@@ -140,21 +134,16 @@
                                 </tr>
                             </c:forEach>
                             </tbody>
-
                         </table>
-
                     </div>
-                    <!-- 数据表格 /-->
-
 
                 </div>
-                <!-- .box-footer-->
                 <div class="box-footer">
                     <div class="pull-left">
                         <div class="form-group form-inline">
-                            当前第${pOfferList.pageNum}页，总共${pOfferList.pages }页，共${pOfferList.total}条数据。 每页 <select id="pagesize"  class="form-control">
+                            当前第${sqList.pageNum}页，总共${sqList.pages }页，共${sqList.total}条数据。 每页 <select id="pagesize"  class="form-control">
                             <c:choose>
-                                <c:when test="${pOfferList.pageSize == 10}">
+                                <c:when test="${sqList.pageSize == 10}">
                                     <option selected="true">10</option>
                                 </c:when>
                                 <c:otherwise>
@@ -162,7 +151,7 @@
                                 </c:otherwise>
                             </c:choose>
                             <c:choose>
-                                <c:when test="${pOfferList.pageSize == 15}">
+                                <c:when test="${sqList.pageSize == 15}">
                                     <option selected="true">15</option>
                                 </c:when>
                                 <c:otherwise>
@@ -170,7 +159,7 @@
                                 </c:otherwise>
                             </c:choose>
                             <c:choose>
-                                <c:when test="${pOfferList.pageSize == 20}">
+                                <c:when test="${sqList.pageSize == 20}">
                                     <option selected="true">20</option>
                                 </c:when>
                                 <c:otherwise>
@@ -184,9 +173,9 @@
                     <div class="box-tools pull-right">
                         <ul class="pagination">
                             <li><a href="#"  onClick="fy(1)" aria-label="Previous">首页</a></li>
-                            <li><a href="#" onClick="fy(${pOfferList.prePage})">上一页</a></li>
-                            <li><a href="#" onClick="fy(${pOfferList.nextPage})">下一页</a></li>
-                            <li><a href="#" onClick="fy(${pOfferList.pages})" aria-label="Next">尾页</a></li>
+                            <li><a href="#" onClick="fy(${sqList.prePage})">上一页</a></li>
+                            <li><a href="#" onClick="fy(${sqList.nextPage})">下一页</a></li>
+                            <li><a href="#" onClick="fy(${sqList.pages})" aria-label="Next">尾页</a></li>
                         </ul>
                     </div>
 
@@ -305,7 +294,6 @@
 <script
         src="${pageContext.request.contextPath}/plugins/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 <script
-        src="${pageContext.request.contextPath}/js/position-list.js"></script>
+        src="${pageContext.request.contextPath}/js/position-sq-list.js"></script>
 </body>
-
 </html>

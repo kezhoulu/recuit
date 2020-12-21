@@ -2,8 +2,11 @@ package com.recuit.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.recuit.cache.UserCache;
+import com.recuit.config.PropertyConfigUtil;
+import com.recuit.model.RoleModel;
 import com.recuit.model.UserModel;
 import com.recuit.service.UserService;
+import com.recuit.util.SpringSecurityUtil;
 import com.recuit.util.UUIDUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -12,9 +15,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * 用户角色处理类
@@ -35,6 +42,7 @@ public class UserController {
         logger.info("查找所有的用户信息");
         ModelAndView mv = new ModelAndView();
         mv.addObject("userList" , new PageInfo<UserModel>(userService.getUserList(pageNum,pageSize, StringUtils.isBlank(username)?null:username)));
+        mv.addObject("username",username);
         mv.setViewName("/user-list");
         return mv;
     }
@@ -63,6 +71,23 @@ public class UserController {
     @RequestMapping(value = "/register.do",method = RequestMethod.POST)
     public ModelAndView register(String username , String password , String right){
         return userService.register(username,password,right);
+    }
+
+    @RequestMapping(value = "/updateinfo.do",method = RequestMethod.GET)
+    public ModelAndView updateinfo(){
+        ModelAndView mv = new ModelAndView();
+        UserModel user = userService.getUserById(SpringSecurityUtil.currentUser().getId(),true);
+        mv.addObject("user",user);
+        mv.setViewName("/update-info");
+        return mv;
+    }
+
+    @RequestMapping(value = "/update-submit.do",method = RequestMethod.POST)
+    public ModelAndView updateSubmit(@RequestParam(value="files",required=false) MultipartFile files , UserModel user ) throws IOException {
+        user = userService.updateSubmit(files,user);
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/main");
+        return mv;
     }
 
 }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.recuit.mapper.CodeMapper">
+    <resultMap id="codeModel" type="com.recuit.model.CodeModel">
+        <result property="code" column="c_code" jdbcType="VARCHAR"/>
+        <result property="pid" column="c_pid" jdbcType="VARCHAR"/>
+        <result property="codeName" column="c_codename" jdbcType="VARCHAR"/>
+        <result property="valid" column="n_valid" jdbcType="INTEGER"/>
+        <result property="order" column="n_order" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <select id="getCodeList" resultMap="codeModel">
+        select * from t_code
+    </select>
+</mapper>

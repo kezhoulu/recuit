@@ -20,4 +20,18 @@
         select * from t_role where c_id = #{id} limit 1
     </select>
 
+    <update id="updateUser" parameterType="com.recuit.model.RoleModel">
+
+        update t_role set
+        c_key = #{role.key},
+        c_keyname = #{role.keyName},
+        c_describe = #{role.describe}
+        where c_id = #{role.id}
+    </update>
+    <insert id="saveRole" parameterType="com.recuit.model.RoleModel">
+        insert into t_role(c_id,c_key,c_keyname,c_describe)  values (#{role.id},#{role.key},#{role.keyName},#{role.describe});
+    </insert>
+    <select id="getRoleByKey" resultMap="roleModel">
+        select * from t_role where c_key=#{key} limit 1
+    </select>
 </mapper>

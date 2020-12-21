@@ -4,12 +4,25 @@ package com.recuit.model;
  * 角色model
  */
 public class RoleModel {
+
+    /**
+     * 主键
+     */
     private  String id;
 
+    /**
+     * 角色代码
+     */
     private String key;
 
+    /**
+     * 角色名称
+     */
     private String keyName;
 
+    /**
+     * 描述
+     */
     private String describe;
 
     private boolean edit;
@@ -46,7 +59,7 @@ public class RoleModel {
         this.describe = describe;
     }
 
-    public boolean isEdit() {
+    public boolean getEdit() {
         return edit;
     }
 

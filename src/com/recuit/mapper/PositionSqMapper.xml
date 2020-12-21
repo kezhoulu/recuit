@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.recuit.mapper.PositionSqMapper">
+    <resultMap id="positionSqModel" type="com.recuit.model.PositionSqModel">
+        <result property="id" column="c_id" jdbcType="VARCHAR"/>
+        <result property="userId" column="c_user_id" jdbcType="VARCHAR"/>
+        <result property="positionId" column="c_position_id" jdbcType="VARCHAR"/>
+        <result property="userName" column="c_username" jdbcType="VARCHAR"/>
+        <result property="sqrq" column="d_sqrq" jdbcType="DATE"/>
+        <result property="sqgw" column="c_sqgw" jdbcType="VARCHAR"/>
+        <result property="sqgs" column="c_sqgs" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="insertPositionSq" >
+        INSERT INTO t_offer_position(c_id, c_user_id, c_position_id, d_sqrq, c_username, c_sqgw, c_sqgs)
+        VALUES (#{sq.id}, #{sq.userId}, #{sq.positionId}, #{sq.sqrq}, #{sq.userName}, #{sq.sqgw}, #{sq.sqgs});
+    </insert>
+
+    <select id="getPositionSqList" resultMap="positionSqModel">
+        select * from t_offer_position
+        <if test="filter=='COMPANY'">
+          where c_sqgs = #{userId}
+        </if>
+        <if test="filter == 'USER'">
+            where c_user_id = #{userId}
+        </if>
+    </select>
+</mapper>

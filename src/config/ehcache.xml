@@ -19,4 +19,11 @@
            timeToLiveSeconds="0"   
            overflowToDisk="false"
            />
+    <cache name="codeCache"
+           maxElementsInMemory="1000"
+           eternal="false"
+           timeToIdleSeconds="0"
+           timeToLiveSeconds="0"
+           overflowToDisk="false"
+    />
 </ehcache>  

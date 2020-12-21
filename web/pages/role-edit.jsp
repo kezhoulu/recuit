@@ -94,25 +94,27 @@
 					<div class="row data-type">
 
 						<div class="col-md-2 title">角色名称</div>
+						<input type="text" name="id" style="display:none" value="${role.id}"/>
+						<input type="text" name="edit" style="display:none" value="${role.edit}"/>
 						<div class="col-md-4 data">
-							<input type="text" class="form-control" name="roleName"
-								placeholder="角色名称" value="">
+							<input type="text" class="form-control" name="keyName"
+								placeholder="角色名称" value="${role.keyName}">
 						</div>
 						<div class="col-md-2 title">角色KEY</div>
 						<div class="col-md-4 data">
-							<input type="text" class="form-control" name="roleDesc"
-								placeholder="角色描述" value="">
+							<input type="text" class="form-control" name="key"
+								placeholder="角色描述" value="${role.key}">
 						</div>
 						<div class="col-md-2 title">角色描述</div>
 						<div class="col-md-4 data">
-							<input type="text" class="form-control" name="roleDesc"
-								   placeholder="角色描述" value="">
+							<input type="text" class="form-control" name="describe"
+								   placeholder="角色描述" value="${role.describe}">
 						</div>
 					</div>
 				</div>
 				<!--订单信息/--> <!--工具栏-->
 				<div class="box-tools text-center">
-					<button type="submit" class="btn bg-maroon">保存</button>
+					<button type="submit" class="btn bg-blue">保存</button>
 					<button type="button" class="btn bg-default"
 						onclick="history.back(-1);">返回</button>
 				</div>
@@ -125,11 +127,10 @@
 		<!-- 底部导航 -->
 		<footer class="main-footer">
 		<div class="pull-right hidden-xs">
-			<b>Version</b> 1.0.8
+			<b>Version</b> 1.0.0
 		</div>
-		<strong>Copyright &copy; 2014-2017 <a
-			href="http://www.itcast.cn">研究院研发部</a>.
-		</strong> All rights reserved. </footer>
+			<<strong>Copyright &copy; 2014-2017
+		</strong> All rights reserved.  </footer>
 		<!-- 底部导航 /-->
 
 	</div>

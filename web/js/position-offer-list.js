@@ -17,13 +17,13 @@ function setSidebarActive(tagUri) {
     }
 }
 
-$(document)
-    .ready(
-        function() {
-            // 激活导航位置
-            setSidebarActive("user-setting");
+$(document).ready(function() {
 
-        });
+    // 激活导航位置
+    setSidebarActive("system-zwfb");
+
+});
+
 
 /**
  * 翻页
@@ -31,7 +31,7 @@ $(document)
  */
 function fy(pageNum) {
     var pageSize = $('#pagesize').val();
-    window.location.href="/recuit/user/user-list.do?pageNum="+pageNum+"&pageSize="+pageSize+"&username=";
+    window.location.href="/recuit/position-offer/position-offer-list.do?pageNum="+pageNum+"&pageSize="+pageSize+"&gwmc=";
 }
 
 /**
@@ -40,16 +40,16 @@ function fy(pageNum) {
 $(document).ready(function(){
     $('#pagesize').change(function(){
         var pageSize = $('#pagesize').val();
-        var username = $('#searchinput').val();
-        window.location.href="/recuit/user/user-list.do?pageNum=1&pageSize="+pageSize+"&username="+username;
+        var gwmc = $('#searchinput').val();
+        window.location.href="/recuit/position-offer/position-offer-list.do?pageNum=1&pageSize="+pageSize+"&gwmc="+gwmc;
     })
 })
 
 
 $(document).keyup(function (e) {
     if (e.keyCode == 13) {
-        var username = $('#searchinput').val();
+        var gwmc = $('#searchinput').val();
         var pageSize = $('#pagesize').val();
-        window.location.href="/recuit/user/user-list.do?pageNum=1&pageSize="+pageSize+"&username="+username;
+        window.location.href="/recuit/position-offer/position-offer-list.do?pageNum=1&pageSize="+pageSize+"&gwmc="+gwmc;
     }
 });

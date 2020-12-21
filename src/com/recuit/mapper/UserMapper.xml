@@ -9,6 +9,14 @@
         <result property="phoneNum" column="c_phonenum" jdbcType="VARCHAR"/>
         <result property="status" column="c_status" jdbcType="VARCHAR"/>
         <result property="right" column="c_right" jdbcType="VARCHAR"/>
+        <result property="userNameCn" column="c_usernamecn" jdbcType="VARCHAR"/>
+        <result property="extId" column="c_extid" jdbcType="VARCHAR"/>
+        <result property="byxx" column="c_byxx" jdbcType="VARCHAR"/>
+        <result property="gzjl" column="c_gzjl" jdbcType="VARCHAR"/>
+        <result property="csny" column="c_csny" jdbcType="VARCHAR"/>
+        <result property="jldz" column="c_jldz" jdbcType="VARCHAR"/>
+        <result property="ypgw" column="c_ypgw" jdbcType="VARCHAR"/>
+        <result property="jlmc" column="c_jlmc" jdbcType="VARCHAR"/>
     </resultMap>
 
 
@@ -21,7 +29,8 @@
     </select>
 
     <select id="getUserById" resultMap="userModel">
-        select * from t_users where c_id = #{id}
+        select u.*,ext.c_id c_extid ,ext.c_byxx,ext.c_gzjl,ext.c_csny,ext.c_jldz,ext.c_ypgw,ext.c_jlmc
+        from t_users u left join t_user_ext ext on ext.c_user_id=u.c_id where u.c_id = #{id} limit 1
     </select>
 
     <select id="getUserByUsername" resultMap="userModel">
@@ -47,9 +56,30 @@
         c_password = #{user.passWord},
         c_email =  #{user.email},
         c_phonenum =  #{user.phoneNum},
+        c_usernamecn = #{user.userNameCn},
         c_status = #{user.status},
         c_right = #{user.right}
         where c_id = #{user.id}
 
     </update>
+
+    <update id="updateExtUser" parameterType="com.recuit.model.UserModel">
+        update t_user_ext set
+        c_byxx = #{user.byxx},
+        c_gzjl = #{user.gzjl},
+        c_csny =  #{user.csny},
+        c_jldz =  #{user.jldz},
+        c_ypgw = #{user.ypgw},
+        c_jlmc = #{user.jlmc}
+        where c_user_id = #{user.id}
+    </update>
+
+    <insert id="insertExtUser" parameterType="com.recuit.model.UserModel">
+        INSERT INTO t_user_ext (c_id, c_user_id, c_byxx, c_gzjl, c_csny, c_jldz, c_ypgw,c_jlmc)
+        VALUES (#{user.extId}, #{user.id}, #{user.byxx}, #{user.gzjl}, #{user.csny}, #{user.jldz}, #{user.ypgw},#{user.jlmc});
+    </insert>
+
+    <select id="getExtUserById" resultMap="userModel">
+        select c_id c_extid,c_user_id c_id ,c_byxx,c_gzjl,c_csny,c_jldz,c_ypgw,c_jlmc from t_user_ext where c_user_id=#{id}
+    </select>
 </mapper>
