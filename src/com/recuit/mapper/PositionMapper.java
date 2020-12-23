@@ -23,4 +23,5 @@ public interface PositionMapper {
 
     PositionModel getPositionById(String id);
 
+    void deletePositionById(String id);
 }

@@ -145,4 +145,14 @@ public class PositionOfferServiceImpl implements PositionOfferService {
     public void deleteOfferPositionById(String id) {
         positionSqMapper.deleteOfferPositionById(id);
     }
+
+    /**
+     * 根据id已经发布的职位
+     *
+     * @param id
+     */
+    @Override
+    public void deletePositionById(String id) {
+        positionMapper.deletePositionById(id);
+    }
 }

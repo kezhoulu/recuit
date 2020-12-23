@@ -37,4 +37,7 @@
         (#{position.id},#{position.gzdd},#{position.gznx},#{position.zpxq},#{position.gwmc},#{position.ssgs},#{position.zt});
     </insert>
 
+    <delete id="deletePositionById" >
+        delete from t_position where c_id = #{id}
+    </delete>
 </mapper>

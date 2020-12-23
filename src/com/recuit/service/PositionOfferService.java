@@ -41,4 +41,10 @@ public interface PositionOfferService {
      * @param id
      */
     void deleteOfferPositionById(String id);
+
+    /**
+     * 根据id已经发布的职位
+     * @param id
+     */
+    void deletePositionById(String id);
 }

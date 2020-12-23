@@ -139,4 +139,18 @@ public class PositionOfferController {
         mv.setViewName("redirect:/position-offer/position-sq-list.do?pageNum=1&pageSize=10&gwmc=");
         return mv;
     }
+
+    /**
+     * 根据id已经发布的职位
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/deletePositionById.do",method = RequestMethod.GET)
+    public  ModelAndView deletePositionById(String id){
+        ModelAndView mv = new ModelAndView();
+        positionOfferService.deletePositionById(id);
+        mv.addObject("message" , "删除成功");
+        mv.setViewName("redirect:/position-offer/position-offer-list.do?pageNum=1&pageSize=10&gwmc=");
+        return mv;
+    }
 }
