@@ -28,4 +28,17 @@ public interface PositionOfferService {
     List<PositionSqModel> getPositionSqList(int pageNum, int pageSize, String gwmc);
 
     void offerPositionById(String id);
+
+    /**
+     * 获取职位申请详情信息
+     * @param id
+     * @return
+     */
+    Map<String, Object> getSqPositionById(String id);
+
+    /**
+     * 根据申请id申请记录
+     * @param id
+     */
+    void deleteOfferPositionById(String id);
 }

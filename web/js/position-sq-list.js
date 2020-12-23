@@ -31,7 +31,8 @@ $(document).ready(function() {
  */
 function fy(pageNum) {
     var pageSize = $('#pagesize').val();
-    window.location.href="/recuit/position-offer/position-sq-list.do?pageNum="+pageNum+"&pageSize="+pageSize+"&gwmc=";
+    var gwmc = $('#searchinput').val();
+    window.location.href="/recuit/position-offer/position-sq-list.do?pageNum="+pageNum+"&pageSize="+pageSize+"&gwmc="+gwmc;
 }
 
 /**
@@ -41,7 +42,7 @@ $(document).ready(function(){
     $('#pagesize').change(function(){
         var pageSize = $('#pagesize').val();
         var gwmc = $('#searchinput').val();
-        window.location.href="/recuit/position-sq/position-offer-list.do?pageNum=1&pageSize="+pageSize+"&gwmc="+gwmc;
+        window.location.href="/recuit/position-offer/position-sq-list.do?pageNum=1&pageSize="+pageSize+"&gwmc="+gwmc;
     })
 })
 

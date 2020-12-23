@@ -11,6 +11,7 @@ import com.recuit.aop.annotation.UserConvert;
 import com.recuit.cache.CodeCache;
 import com.recuit.cache.UserCache;
 import com.recuit.model.CodeModel;
+import com.recuit.model.UserModel;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -86,10 +87,10 @@ public class ConvertAspect {
 			String oldValue = null;
 			String newValue = null;
 			try {
-//				oldValue = (String) field.get(obj);
-//				IUser user = organService.getUser(oldValue);
-//				newValue = user == null ? null : user.getName();
-			} catch (IllegalArgumentException e) {
+				oldValue = (String) field.get(obj);
+				UserModel user = userCache.getUserCache(oldValue);
+				newValue = user == null ? null : user.getUserNameCn();
+			} catch (IllegalArgumentException | IllegalAccessException e) {
 				log.error("获取原始值失败", e.getMessage());
 			}
 			if (newValue != null) {

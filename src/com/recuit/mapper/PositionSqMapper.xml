@@ -17,12 +17,25 @@
     </insert>
 
     <select id="getPositionSqList" resultMap="positionSqModel">
-        select * from t_offer_position
+        select * from t_offer_position where 1=1
         <if test="filter=='COMPANY'">
-          where c_sqgs = #{userId}
+          and c_sqgs = #{userId}
         </if>
         <if test="filter == 'USER'">
-            where c_user_id = #{userId}
+            and c_user_id = #{userId}
+        </if>
+        <if test="gwmc!=null">
+            and c_sqgw like concat('%',#{gwmc},'%')
         </if>
     </select>
+
+    <select id="getSqPositionById" resultType="HashMap">
+        select o.c_sqgw,u.c_phonenum,e.* from t_offer_position o inner join t_users u on o.c_user_id=u.c_id
+        left join t_user_ext e on e.c_user_id = u.c_id limit 1
+
+    </select>
+
+    <delete id="deleteOfferPositionById" >
+        delete from t_offer_position where c_id=#{id}
+    </delete>
 </mapper>

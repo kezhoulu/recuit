@@ -1,20 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <!-- 页面meta -->
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>申请信息</title>
+<meta name="description" content="申请信息">
+<meta name="keywords" content="申请信息">
 
-<title>招聘管理系统首页</title>
-<meta name="description" content="招聘管理系统首页">
-<meta name="keywords" content="招聘管理系统首页">
-
+<!-- Tell the browser to be responsive to screen width -->
 <meta
 	content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"
 	name="viewport">
+
 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/plugins/bootstrap/css/bootstrap.min.css">
@@ -58,30 +58,76 @@
 	href="${pageContext.request.contextPath}/plugins/ionslider/ion.rangeSlider.skinNice.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/plugins/bootstrap-slider/slider.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.css">
 </head>
 
-<body class="hold-transition skin-blue sidebar-mini">
+	<body class="hold-transition skin-blue sidebar-mini">
 
 	<div class="wrapper">
 
 		<!-- 页面头部 -->
 		<jsp:include page="header.jsp"></jsp:include>
-			<!-- 页面头部 /-->
-
+		<!-- 页面头部 /-->
 		<!-- 导航侧栏 -->
 		<jsp:include page="aside.jsp"></jsp:include>
 		<!-- 导航侧栏 /-->
 
 		<!-- 内容区域 -->
 		<div class="content-wrapper">
-			<h3>系统介绍</h3>
-			本系统是一个招聘的简版系统<br/>
-			共分为三个角色，管理员、公司用户、普通用户<br/>
-			公司发布岗位、查看普通用户的申请信息<br/>
-			普通用户申请职位<br/>
-			<%--<img src="${pageContext.request.contextPath}/img/center.jpg"
-				width="100%" height="80%" />--%>
 
+			<!-- 内容头部 -->
+			<section class="content-header">
+			<h1>
+				 申请信息
+			</h1>
+			</section>
+			<!-- 内容头部 /-->
+
+			<form action="${pageContext.request.contextPath}/user/update-submit.do"
+				method="post" enctype="multipart/form-data">
+				<!-- 正文区域 -->
+				<section class="content"> <!--产品信息-->
+
+				<div class="panel panel-default">
+					<div class="panel-heading">申请信息</div>
+					<div class="row data-type">
+						<input type="text" style="display:none"  id="jldz" value="${user.c_jldz}">
+						<div class="col-md-2 title">毕业院校</div>
+						<div class="col-md-4 data">
+							<input type="text" readonly class="form-control" name="byxx"
+								placeholder="毕业院校" value="${user.c_byxx}">
+						</div>
+						<div class="col-md-2 title">出生年月</div>
+						<div class="col-md-4 data">
+							<input type="text" readonly class="form-control" name="csny"
+								placeholder="出生年月" value="${user.c_csny}">
+						</div>
+						<div class="col-md-2 title">应聘岗位</div>
+						<div class="col-md-4 data">
+							<input type="text" readonly class="form-control" name="ypgw"
+								   placeholder="应聘岗位" value="${user.c_sqgw}">
+						</div>
+						<div class="col-md-2 title" >简历</div>
+						<div class="col-md-4 data">
+							<input readonly type="text" style="cursor:pointer;color:dodgerblue"  class="form-control" id="jlmc"
+								   placeholder="已上传简历" value="${user.c_jlmc}">
+						</div>
+						<div class="col-md-2 title">工作经历</div>
+						<div class="col-md-4 data">
+							<textarea name="gzjl" readonly class="form-control" rows="10" placeholder="工作经历 ...">${user.c_gzjl}
+							</textarea>
+						</div>
+					</div>
+				</div>
+				<!--订单信息/--> <!--工具栏-->
+				<div class="box-tools text-center">
+					<button type="button" class="btn bg-default"
+							onclick="history.back(-1);">返回</button>
+				</div>
+				<!--工具栏/--> </section>
+				<!-- 正文区域 /-->
+			</form>
 		</div>
 		<!-- 内容区域 /-->
 
@@ -90,9 +136,12 @@
 		<div class="pull-right hidden-xs">
 			<b>Version</b> 1.0.0
 		</div>
-		<strong>Copyright &copy; 2014-2017
-		</strong> All rights reserved. </footer>
+			<<strong>Copyright &copy; 2014-2017
+		</strong> All rights reserved.  </footer>
+		<!-- 底部导航 /-->
+
 	</div>
+
 
 	<script
 		src="${pageContext.request.contextPath}/plugins/jQuery/jquery-2.2.3.min.js"></script>
@@ -177,31 +226,17 @@
 		src="${pageContext.request.contextPath}/plugins/ionslider/ion.rangeSlider.min.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/plugins/bootstrap-slider/bootstrap-slider.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
+	<script
+			src="${pageContext.request.contextPath}/js/update-info.js"></script>
+
 	<script>
-		$(document).ready(function() {
-			// 选择框
-			$(".select2").select2();
 
-			// WYSIHTML5编辑器
-			$(".textarea").wysihtml5({
-				locale : 'zh-CN'
-			});
-		});
 
-		// 设置激活菜单
-		function setSidebarActive(tagUri) {
-			var liObj = $("#" + tagUri);
-			if (liObj.length > 0) {
-				liObj.parent().parent().addClass("active");
-				liObj.addClass("active");
-			}
-		}
-
-		$(document).ready(function() {
-			// 激活导航位置
-			setSidebarActive("admin-index");
-		});
 	</script>
+	
+
 </body>
 
 </html>

@@ -7,12 +7,15 @@ import com.recuit.config.PropertyConfigUtil;
 import com.recuit.mapper.UserMapper;
 import com.recuit.model.UserModel;
 import com.recuit.service.UserService;
+import com.recuit.util.SpringSecurityUtil;
 import com.recuit.util.UUIDUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.codec.Base64;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Base64Utils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -103,7 +106,13 @@ public class UserServiceImpl implements UserService {
                 userMapper.saveUser(user);
             }
             userCache.updateCache(user);
-            mv.setViewName("redirect:/user/user-list.do?pageNum=1&pageSize=10&username=");
+            if(StringUtils.contains(SpringSecurityUtil.currentUser().getRight(),"ADMIN")){
+                mv.setViewName("redirect:/user/user-list.do?pageNum=1&pageSize=10&username=");
+            }else{
+                mv.addObject("user",user);
+                mv.setViewName("user-edit");
+            }
+
         }catch (Exception e){
             logger.error("保存或更新失败",e);
             mv.addObject("user",user);
@@ -150,7 +159,7 @@ public class UserServiceImpl implements UserService {
             //目前保存在本地，可迁移至ftp或minio
             files.transferTo(new File(destFile));
             user.setJlmc(destFileName);
-            user.setJldz(destFile);
+            user.setJldz(new String(Base64.encode(destFile.getBytes("UTF-8")),"UTF-8"));
         }
         UserModel user1 = userMapper.getExtUserById(user.getId());
         if(user1 == null){

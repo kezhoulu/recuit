@@ -25,6 +25,13 @@ public class PositionOfferController {
     @Autowired
     private PositionOfferService positionOfferService;
 
+    /**
+     * 跳转到职位发布列表页面
+     * @param pageNum
+     * @param pageSize
+     * @param gwmc
+     * @return
+     */
     @RequestMapping(value = "/position-offer-list.do",method = RequestMethod.GET)
     public ModelAndView getPositionOfferList(int pageNum ,int pageSize ,String gwmc){
         ModelAndView mv = new ModelAndView();
@@ -34,6 +41,13 @@ public class PositionOfferController {
         return mv;
     }
 
+    /**
+     * 跳转到职位申请列表页面
+     * @param pageNum
+     * @param pageSize
+     * @param gwmc
+     * @return
+     */
     @RequestMapping(value = "/position-list.do",method = RequestMethod.GET)
     public ModelAndView getPositionList(int pageNum ,int pageSize ,String gwmc){
         ModelAndView mv = new ModelAndView();
@@ -43,6 +57,12 @@ public class PositionOfferController {
         return mv;
     }
 
+    /**
+     * 进入职位信息编辑页面
+     * @param id
+     * @param edit
+     * @return
+     */
     @RequestMapping(value = "/getPositionById.do",method = RequestMethod.GET)
     public ModelAndView getPositionById(String id,boolean edit){
         ModelAndView mv = new ModelAndView();
@@ -52,12 +72,23 @@ public class PositionOfferController {
         return mv;
     }
 
-
+    /**
+     * 保存或更新职位信息
+     * @param positionModel
+     * @return
+     */
     @RequestMapping(value = "/save.do",method = RequestMethod.POST)
     public ModelAndView saveUser(PositionModel positionModel){
         return positionOfferService.saveOrUpdatePosition(positionModel);
     }
 
+    /**
+     * 进入到职位申请记录列表
+     * @param pageNum
+     * @param pageSize
+     * @param gwmc
+     * @return
+     */
     @RequestMapping(value = "/position-sq-list.do",method = RequestMethod.GET)
     public ModelAndView getPositionSqList(int pageNum ,int pageSize ,String gwmc){
         ModelAndView mv = new ModelAndView();
@@ -78,6 +109,34 @@ public class PositionOfferController {
         positionOfferService.offerPositionById(id);
         mv.addObject("message" , "申请成功");
         mv.setViewName("redirect:/position-offer/position-list.do?pageNum=1&pageSize=10&gwmc=");
+        return mv;
+    }
+
+    /**
+     * 进入到职位申请详情页面
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/getSqPositionById.do",method = RequestMethod.GET)
+    public ModelAndView getSqPositionById(String id){
+        ModelAndView mv = new ModelAndView();
+        Map<String,Object> user = positionOfferService.getSqPositionById(id);
+        mv.addObject("user" , user);
+        mv.setViewName("offer-info");
+        return mv;
+    }
+
+    /**
+     * 根据id删除已经申请的岗位
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/deleteOfferPositionById.do",method = RequestMethod.GET)
+    public ModelAndView deleteOfferPositionById(String id){
+        ModelAndView mv = new ModelAndView();
+        positionOfferService.deleteOfferPositionById(id);
+        mv.addObject("message" , "删除成功");
+        mv.setViewName("redirect:/position-offer/position-sq-list.do?pageNum=1&pageSize=10&gwmc=");
         return mv;
     }
 }

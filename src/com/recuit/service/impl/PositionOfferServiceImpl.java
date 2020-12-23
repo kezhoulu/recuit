@@ -9,7 +9,6 @@ import com.recuit.model.PositionModel;
 import com.recuit.model.PositionSqModel;
 import com.recuit.model.UserModel;
 import com.recuit.service.PositionOfferService;
-import com.recuit.service.PositionService;
 import com.recuit.util.SpringSecurityUtil;
 import com.recuit.util.UUIDUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -39,6 +38,7 @@ public class PositionOfferServiceImpl implements PositionOfferService {
      * @return
      */
     @Override
+    @Convert
     public List<PositionModel> getPositionOfferList(int pageNum, int pageSize, String gwmc, boolean rightFilter) {
         PageHelper.startPage(pageNum,pageSize);
         List<PositionModel> positionList = positionMapper.getPositionOfferList(rightFilter,StringUtils.isNotBlank(gwmc)?gwmc:null);
@@ -74,6 +74,7 @@ public class PositionOfferServiceImpl implements PositionOfferService {
      * @return
      */
     @Override
+    @Convert
     public List<PositionSqModel> getPositionSqList(int pageNum, int pageSize, String gwmc) {
         String filter = "";
         UserModel user = SpringSecurityUtil.currentUser();
@@ -122,5 +123,26 @@ public class PositionOfferServiceImpl implements PositionOfferService {
         }
         positionModel.setEdit(edit);
         return positionModel;
+    }
+
+    /**
+     * 获取职位申请详情信息
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public Map<String, Object> getSqPositionById(String id) {
+        return positionSqMapper.getSqPositionById(id);
+    }
+
+    /**
+     * 根据申请id申请记录
+     *
+     * @param id
+     */
+    @Override
+    public void deleteOfferPositionById(String id) {
+        positionSqMapper.deleteOfferPositionById(id);
     }
 }

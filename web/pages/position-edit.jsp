@@ -1,14 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <!-- 页面meta -->
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>数据 - AdminLTE2定制版</title>
-<meta name="description" content="AdminLTE2定制版">
-<meta name="keywords" content="AdminLTE2定制版">
+<title>职位详细信息</title>
+<meta name="description" content="职位详细信息">
+<meta name="keywords" content="职位详细信息">
 
 <!-- Tell the browser to be responsive to screen width -->
 <meta
@@ -62,7 +63,7 @@
 	href="${pageContext.request.contextPath}/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.css">
 </head>
 
-<body class="hold-transition skin-purple sidebar-mini">
+<body class="hold-transition skin-blue sidebar-mini">
 
 	<div class="wrapper">
 
@@ -123,15 +124,15 @@
 						</div>
 						<div class="col-md-2 title">详情</div>
 						<div class="col-md-4 data">
-							<textarea name="zpxq" class="form-control" rows="10" placeholder="输入详情 ...">
-								${position.zpxq}
-							</textarea>
+							<textarea name="zpxq" class="form-control" rows="10" placeholder="输入详情 ...">${position.zpxq}</textarea>
 						</div>
 					</div>
 				</div>
 				<!--订单信息/--> <!--工具栏-->
 				<div class="box-tools text-center">
-					<button type="submit" class="btn bg-maroon">保存</button>
+					<security:authorize access="hasAnyRole('COMPANY')">
+					<button type="submit" class="btn bg-blue">保存</button>
+					</security:authorize>
 					<button type="button" class="btn bg-default"
 						onclick="history.back(-1);">返回</button>
 				</div>

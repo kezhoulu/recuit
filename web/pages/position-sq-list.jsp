@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 
@@ -124,12 +126,16 @@
                             <c:forEach items="${sqList.list}" var="position">
                                 <tr>
                                     <td class="text-center rowWidth">${position.userName }</td>
-                                    <td class="text-center rowWidth">${position.sqrq }</td>
+                                    <td class="text-center rowWidth"><fmt:formatDate value="${position.sqrq }" pattern="yyyy/MM/dd HH:mm:ss"/></td>
                                     <td class="text-center rowWidth">${position.sqgw }</td>
                                     <td class="text-center rowWidth">${position.sqgs}</td>
                                     <td class="text-center">
-                                        <button type="button" onclick="location.href='${pageContext.request.contextPath}/position-offer/getPositionById.do?id=${position.id}&edit=true'" class="btn bg-olive btn-xs">详情</button>
-                                        <button type="button" onclick="location.href='${pageContext.request.contextPath}/position-offer/offerPositionById.do?id=${position.id}'" class="btn bg-olive btn-xs">申请</button>
+                                        <security:authorize access="hasAnyRole('COMPANY')">
+                                        <button type="button" onclick="location.href='${pageContext.request.contextPath}/position-offer/getSqPositionById.do?id=${position.id}'" class="btn bg-olive btn-xs">详情</button>
+                                        </security:authorize>
+                                        <security:authorize access="hasAnyRole('USER')">
+                                        <button type="button" onclick="location.href='${pageContext.request.contextPath}/position-offer/deleteOfferPositionById.do?id=${position.id}'" class="btn bg-olive btn-xs">删除</button>
+                                        </security:authorize>
                                     </td>
                                 </tr>
                             </c:forEach>

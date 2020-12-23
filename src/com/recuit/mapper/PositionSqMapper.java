@@ -13,4 +13,8 @@ public interface PositionSqMapper {
     void insertPositionSq(@Param("sq") PositionSqModel sq);
 
     List<PositionSqModel> getPositionSqList( @Param("gwmc") String gwmc, @Param("userId") String userId,@Param("filter") String filter);
+
+    Map<String, Object> getSqPositionById(@Param("id") String id);
+
+    void deleteOfferPositionById(@Param("id") String id);
 }

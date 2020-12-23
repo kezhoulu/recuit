@@ -30,8 +30,9 @@ $(document).ready(function() {
  * @param pageNum
  */
 function fy(pageNum) {
+    var gwmc = $('#searchinput').val();
     var pageSize = $('#pagesize').val();
-    window.location.href="/recuit/position-offer/position-offer-list.do?pageNum="+pageNum+"&pageSize="+pageSize+"&gwmc=";
+    window.location.href="/recuit/position-offer/position-list.do?pageNum="+pageNum+"&pageSize="+pageSize+"&gwmc="+gwmc;
 }
 
 /**
@@ -41,7 +42,7 @@ $(document).ready(function(){
     $('#pagesize').change(function(){
         var pageSize = $('#pagesize').val();
         var gwmc = $('#searchinput').val();
-        window.location.href="/recuit/position-offer/position-offer-list.do?pageNum=1&pageSize="+pageSize+"&gwmc="+gwmc;
+        window.location.href="/recuit/position-offer/position-list.do?pageNum=1&pageSize="+pageSize+"&gwmc="+gwmc;
     })
 })
 

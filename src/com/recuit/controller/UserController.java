@@ -12,16 +12,21 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.codec.Base64;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Base64Utils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.io.IOException;
+import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.Response;
+import java.io.*;
 
 /**
  * 用户角色处理类
@@ -50,6 +55,9 @@ public class UserController {
     @RequestMapping(value = "/getUserById.do",method = RequestMethod.GET)
     public ModelAndView getUserById(String id,boolean edit){
         ModelAndView mv = new ModelAndView();
+        if(StringUtils.isBlank(id)){
+            id = SpringSecurityUtil.currentUser().getId();
+        }
         UserModel user =  userService.getUserById(id,edit);
         mv.addObject("user" , user);
         mv.setViewName("user-edit");
@@ -90,4 +98,21 @@ public class UserController {
         return mv;
     }
 
+    @RequestMapping(value = "/getfile.do",method = RequestMethod.GET)
+    public void  getFile(String path,HttpServletRequest request,HttpServletResponse response) throws IOException {
+        path = new String(Base64.decode(path.getBytes("UTF-8")),"UTF-8") ;
+        File file = new File(path);
+        OutputStream fos = response.getOutputStream();
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("multipart/form-data");
+        response.setHeader("Content-Disposition", "attachment;fileName="+file.getName());
+        InputStream in = new FileInputStream(file);
+        byte[] buffer = new byte[1024];
+        int size = 0;
+        while ((size = in.read(buffer)) != -1) {
+            fos.write(buffer, 0, size);
+        }
+        fos.flush();
+        fos.close();
+    }
 }

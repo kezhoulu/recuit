@@ -36,7 +36,9 @@ public class UserCache {
 
             for (UserModel user : userList) {
                 net.sf.ehcache.Element item = new net.sf.ehcache.Element(user.getUserName(),user);
+                net.sf.ehcache.Element item1 = new net.sf.ehcache.Element(user.getId(),user);
                 elements.add(item);
+                elements.add(item1);
             }
             Cache c = CacheUtil.getCache("userCache");
             this.writeLock();
@@ -64,9 +66,11 @@ public class UserCache {
     public void updateCache(UserModel user){
         try{
             net.sf.ehcache.Element item = new net.sf.ehcache.Element(user.getUserName(),user);
+            net.sf.ehcache.Element item1 = new net.sf.ehcache.Element(user.getId(),user);
             Cache c = CacheUtil.getCache("userCache");
             this.writeLock();
             c.put(item);
+            c.put(item1);
         }catch (Exception e){
             logger.error("更新缓存失败",e);
         }finally {

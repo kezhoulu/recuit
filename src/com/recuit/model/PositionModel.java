@@ -1,5 +1,8 @@
 package com.recuit.model;
 
+import com.recuit.aop.annotation.CodeConvert;
+import com.recuit.aop.annotation.UserConvert;
+
 public class PositionModel {
     /**
      * 主键
@@ -29,11 +32,13 @@ public class PositionModel {
     /**
      * 所属公司
      */
+    @UserConvert
     private String ssgs;
 
     /**
      * 状态
      */
+    @CodeConvert(pid = "0001")
     private String zt;
 
     private boolean edit;

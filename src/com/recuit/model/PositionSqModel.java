@@ -17,7 +17,6 @@ public class PositionSqModel {
 
     private String userName;
 
-    @DateConvert()
     private Date sqrq;
     private String sqgw;
 

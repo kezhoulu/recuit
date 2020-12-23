@@ -40,6 +40,7 @@
 				</ul>
 			</li>
 			</security:authorize>
+			<security:authorize access="hasAnyRole('COMPANY','USER')">
 			<li class="treeview"><a href="#"> <i class="fa fa-cube"></i>
 					<span>招聘信息</span> <span class="pull-right-container"> <i
 						class="fa fa-angle-left pull-right"></i>
@@ -65,6 +66,7 @@
 					</a></li>
 					</security:authorize>
 				</ul></li>
+			</security:authorize>
 		</ul>
 	</section>
 </aside>

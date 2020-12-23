@@ -96,7 +96,7 @@
 						<div class="col-md-2 title">毕业院校</div>
 						<input type="text" name="id" style="display:none" value="${user.id}"/>
 						<input type="text" name="extId" style="display:none" value="${user.extId}"/>
-						<input type="text" name="jldz" style="display:none" value="${user.jldz}"/>
+						<input id="jldz" type="text" name="jldz" style="display:none" value="${user.jldz}"/>
 						<div class="col-md-4 data">
 							<input type="text" class="form-control" name="byxx"
 								placeholder="毕业院校" value="${user.byxx}">
@@ -117,14 +117,12 @@
 						</div>
 						<div class="col-md-2 title" >已上传简历</div>
 						<div class="col-md-4 data">
-							<input readonly type="text" class="form-control" name="jlmc"
+							<input id="jlmc" readonly style="cursor:pointer;color:dodgerblue" type="text" class="form-control" name="jlmc"
 								   placeholder="已上传简历" value="${user.jlmc}">
 						</div>
 						<div class="col-md-2 title">工作经历</div>
 						<div class="col-md-4 data">
-							<textarea name="gzjl" class="form-control" rows="10" placeholder="工作经历 ...">
-								${user.gzjl}
-							</textarea>
+							<textarea name="gzjl" class="form-control" rows="10" placeholder="工作经历 ...">${user.gzjl}</textarea>
 						</div>
 					</div>
 				</div>
@@ -148,7 +146,6 @@
 			<<strong>Copyright &copy; 2014-2017
 		</strong> All rights reserved.  </footer>
 		<!-- 底部导航 /-->
-
 	</div>
 
 
@@ -237,12 +234,8 @@
 		src="${pageContext.request.contextPath}/plugins/bootstrap-slider/bootstrap-slider.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
-
-	<script>
-
-
-	</script>
-	
+	<script
+			src="${pageContext.request.contextPath}/js/update-info.js"></script>
 
 </body>
 

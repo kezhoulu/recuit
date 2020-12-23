@@ -62,7 +62,7 @@
 	href="${pageContext.request.contextPath}/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.css">
 </head>
 
-<body class="hold-transition skin-purple sidebar-mini">
+<body class="hold-transition skin-blue sidebar-mini">
 
 	<div class="wrapper">
 
@@ -82,11 +82,11 @@
 				系统管理 <small>用户管理</small>
 			</h1>
 			<ol class="breadcrumb">
-				<li><a href="${pageContext.request.contextPath}/pages/main.jsp"><i
+				<%--<li><a href="${pageContext.request.contextPath}/pages/main.jsp"><i
 						class="fa fa-dashboard"></i> 首页</a></li>
 				<li><a
 					href="${pageContext.request.contextPath}/user/user-list.do">用户管理</a></li>
-				<li class="active">用户表单</li>
+				<li class="active">用户表单</li>--%>
 			</ol>
 			</section>
 			<!-- 内容头部 /-->
@@ -150,7 +150,7 @@
 					</div>
 				</div>
 				<div class="box-tools text-center">
-					<button type="submit" class="btn bg-maroon">保存</button>
+					<button type="submit" class="btn bg-blue">保存</button>
 					<button type="button" class="btn bg-default"
 						onclick="history.back(-1);">返回</button>
 				</div>

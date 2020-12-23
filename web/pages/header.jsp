@@ -36,7 +36,12 @@
 						<!-- Menu Footer-->
 						<li class="user-footer">
 							<div class="pull-left">
+								<security:authorize access="hasAnyRole('USER')">
 								<a href="${pageContext.request.contextPath}/user/updateinfo.do" class="btn btn-default btn-flat">登记简历</a>
+								</security:authorize>
+								<security:authorize access="hasAnyRole('COMPANY')">
+									<a href="${pageContext.request.contextPath}/user/getUserById.do?id=&edit=true" class="btn btn-default btn-flat">修改信息</a>
+								</security:authorize>
 							</div>
 							<div class="pull-right">
 								<a href="${pageContext.request.contextPath}/logout.do"
