@@ -1,39 +1,33 @@
 /*
-Navicat PGSQL Data Transfer
+Navicat MySQL Data Transfer
 
-Source Server         : 172.23.22.235
-Source Server Version : 90503
-Source Host           : 172.23.22.235:5432
+Source Server         : mysql
+Source Server Version : 50717
+Source Host           : localhost:3306
 Source Database       : recuit
-Source Schema         : public
 
-Target Server Type    : PGSQL
-Target Server Version : 90503
+Target Server Type    : MYSQL
+Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2020-12-23 20:45:25
+Date: 2020-12-24 22:24:06
 */
 
+SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for t_code_type
+-- Table structure for `t_code_type`
 -- ----------------------------
-DROP TABLE IF EXISTS "public"."t_code_type";
-CREATE TABLE "public"."t_code_type" (
-"c_id" varchar(255) COLLATE "default",
-"c_name" varchar(255) COLLATE "default",
-"n_valid" varchar(255) COLLATE "default"
-)
-WITH (OIDS=FALSE)
-
-;
+DROP TABLE IF EXISTS `t_code_type`;
+CREATE TABLE `t_code_type` (
+  `c_id` varchar(255) NOT NULL COMMENT '主键',
+  `c_name` varchar(255) DEFAULT NULL COMMENT '代码类型名称',
+  `n_valid` varchar(255) DEFAULT NULL COMMENT '是否有效',
+  PRIMARY KEY (`c_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='代码类型表';
 
 -- ----------------------------
 -- Records of t_code_type
 -- ----------------------------
-INSERT INTO "public"."t_code_type" VALUES ('0001', '状态', '1');
-INSERT INTO "public"."t_code_type" VALUES ('0002', '角色', '1');
-
--- ----------------------------
--- Alter Sequences Owned By 
--- ----------------------------
+INSERT INTO `t_code_type` VALUES ('0001', '状态', '1');
+INSERT INTO `t_code_type` VALUES ('0002', '角色', '1');
